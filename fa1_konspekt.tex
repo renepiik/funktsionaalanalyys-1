@@ -29,6 +29,7 @@
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\K}{\mathbb{K}}
+\newcommand{\C}{\mathbb{C}}
 
 % norm
 \newcommand{\norm}[1]{||#1||}
@@ -60,8 +61,23 @@
 
 \title{Funktsionaalanalüüs 1}
 \author{René Piik}
+\date{2021 kevad}
 
 \maketitle
+
+\section*{Meta}
+
+Õppejõud: Rainis Haller \newline
+Hindamine:
+\begin{enumerate}
+	\item Kontrolltööd $2\times 20p = 40p$;
+	\item Eksam $60p$;
+	\item Lisaülesanded.
+\end{enumerate}
+Semestri lõpus saab ühe kontrolltöödest uuesti teha, kirja läheb sel juhul uuesti kirjutatud töö tulemus.
+
+\tableofcontents
+\newpage
 
 \section{Meetrilised ruumid}
 
@@ -168,7 +184,18 @@ Järeldused:
 
 Täielikku normeeritud ruumi nimetatase Banachi ruumiks. (Mida tähendab täielik normeeritud ruum??)
 
-\section{Klassikalised kaugused ruumis $\K^n$}
+\section{Klassikalised lõplikumõõtmelised normeeritud ruumid}
+
+Vaatleme mittetriviaalset VR-i (üle $\K$) $X$. Olgu $d$ kaugus hulgas $X$.
+Tarvilik tingimus: iga $M>0$ korral leiduvad punktid $x,y\in X$ nii, et $d(x,y) = M$.
+
+Tarvilik ja piisav tingimus: $d$ on indutseeritud normi poolt parajasti siis, kui kehtivad kaks tingimust:
+\begin{enumerate}
+	\item $\forall x,y,z\in X :\h d(x,y) = d(x+z,y+z)$;
+	\item $\forall \alpha\in \K \forall x,y\in X: \h d(x\alpha,y\alpha) = |\alpha|d(x,y)$.
+\end{enumerate}
+Sel juhul see norm on defineeritud seosega $\norm{x} = d(x,0)$.
+
 
 Olgu $X=\{(\xi_1,\dots,\xi_n): \xi_k\in\K\}$ kõigi $n$-komponendiliste vektorite hulk.
 Tähistame hulga $X$ elemente $x=(\xi_1,\dots,\xi_n),\h y=(\eta_1,\dots,\eta_n),\h z=(\zeta_1,\dots,\zeta_n)$.
@@ -178,11 +205,92 @@ Sellises hulgas on mitu võimalust kauguse defineerimiseks, vastavalt erinevad k
 	\[
 		\rho(x,y) = \max_{1\leq k \leq n} |\xi_k-\eta_k|.
 	\]
+	Aksioomide kontroll.
+	\begin{enumerate}
+		\item $\rho(x,y) = 0 \Leftrightarrow x=y$.
+		Tarvilikus on ilmne. 
+		Piisavus. 
+		Olgu $\max_{1\leq k \leq n} |\xi_k-\eta_k| = 0$. 
+		Siis peavad mõlema vektori kõik koordinaadid olema võrdsed, millest järeldub, et ka vektorid ise on võrdsed.
+		\item $\rho(x,y) = \rho(y,x)$.
+		Absoluutväärtuse märgi tõttu pole vahet, kumb punkt võetakse "esimeseks".
+		\item $\rho(x,y) \leq \rho(x,z) + \rho(z,y)$.
+		Iga indeksi korral
+		\begin{align*}
+			|\xi_k-\eta_k| &= |\xi_k-\zeta_k+\zeta_k-\eta_k| \\
+			&\leq |\xi_k-\zeta_k|+|\zeta_k-\eta_k| \\
+			&\leq \rho(x,z) + \rho(z,y).
+		\end{align*}
+		Leides maksimumi $k$ järgi, saamegi kolmnurga võrratuse.
+	\end{enumerate}
+	\item Olgu $1\leq p \leq \infty$.
+	Ruumis $l_p^n$ defineeritakse kaugus
+	\[
+		\rho(x,y) = \left( \sum_{k=1}^n |\xi_k - \eta_k|^p \right)^{\frac{1}{p}}.
+	\]
+	Olulised erijuhud on $l_1^n$, kus $\rho(x,y) = \sum_{k=1}^n |\xi_k-\eta_k|$ ja $l_2^n$.
+	Viimast ruumi tähistatakse ka $\R^n$ või $\C^n$, üldiselt $\K^n$.
+	Ruum $\R^n$ on $n$-mõõtmeline eukleidiline ruum.
+
+	Kauguse aksioomide $1^\circ$ ja $2^\circ$ kehtimist pole raske kontrollida.
+	Aksioomi $3^\circ$ kehtivus järeldub näiteks ruumis $l_1^n$ absoluutväärtuse või mooduli omadustest, kuid kõrgema astme ruumide korral on see keerulisem.
+	Kasutame üldjuhul viimase tingimuse tõestamiseks \textbf{Hölderi võrratust}.
+	\begin{theorem}
+		(Hölderi võrratus) Kui $a_k,b_k\in \K,\h k=1,\dots,n$ ja $1<p<\infty$ ning arv $q$ on määratud võrdusega
+		\[
+			\frac{1}{p} + \frac{1}{q} = 1,
+		\]
+		siis kehtib võrratus
+		\[
+			\sum_{k=1}^n |a_k b_k| \leq \left( \sum_{k=1}^n |a_k|^p \right)^{\frac{1}{p}} \cdot \left( \sum_{k=1}^n |b_k|^q \right)^{\frac{1}{q}}.
+		\]
+		Teistmoodi saaks kirjutada
+		\[
+			\norm{(a_1b_1,\dots,a_nb_n)} \leq \norm{(a_1,\dots,a_n)}_p \cdot \norm{(b_1,\dots,b_n)}_q.
+		\]
+	\end{theorem}
+	Samuti peaks teadma \textbf{Minkowski võrratust}.
+	\begin{theorem}
+		(Minkowski võrratus) Kui $a_k,b_k\in \K,\h k=1,\dots,n$ ja $1<p<\infty$, siis kehtib võrratus
+		\[
+			\left( \sum_{k=1}^n |a_k + b_k|^p \right)^{\frac{1}{p}} \leq \left( \sum_{k=1}^n |a_k|^p \right)^{\frac{1}{p}} + \left( \sum_{k=1}^n |b_k|^p \right)^{\frac{1}{p}}.
+		\]
+		\[
+			\norm{(a_1,\dots,a_n) + (b_1,\dots,b_n)}_p \leq \norm{(a_1,\dots,a_n)}_p + \norm{(b_1,\dots,b_n)}_p.
+		\]
+	\end{theorem}
+
+	\textit{Vaata moodlest lisamaterjalide alt Rainise lemmiktõestust Minkowski võrratusele!}
+
+	\begin{yl}
+		Näidata, et
+		\[
+			\lim_{p\rightarrow \infty} \left( \sum_{k=1}^n |\xi_k-\eta_k|^p \right)^{\frac{1}{p}} = \max_{1\leq k\leq n} |\xi_k - \eta_k|.
+		\]
+		Selle ülesande tulemuse järgi on kaugus ruumis $m_n$ ruumide $l_p^n$ kauguste piirjuht, mistõttu on õigustatud tähistus $m_n = l_\infty^n$.
+	\end{yl}
+
 \end{enumerate}
 
 \subsection*{Jadade koonduvus neis ruumides}
 
+Osutub, et ruumis $(\K_n, \norm{\cdot}_p)$, kus $1\leq p\leq \infty$, $x_n\rightarrow x$\dots
+
 \section{Klassikalised jadaruumid}
+
+Siin vaatleme jadaruume, kus meetrilise ruumi $X$ elementideks on arvjadad $(\xi_k),\xi_k\in\K$.
+Tähistame ruumi $X$ elemente $x=(\xi_k),y=(\eta_k),z=(\zeta_k)$.
+\begin{enumerate}
+	\item Tõkestatud jadade ruum $m$ on hulgana kirjeldatav:
+	\[
+		m=\{ (\xi_k):\xi_k\in\K,\sup_k |\xi_k|<\infty \},
+	\]
+	s.t. $x\in m$ parajasti siis, kui leidub arv $M$ (mis võib sõltuda elemendist $x$) nii, et $|\xi_k|\leq M$.
+	Ruumis $m$ defineeritakse kaugus võrdusega
+	\[
+		\rho(x,y) = \sup_k |\xi_k-\eta_k|.
+	\]
+\end{enumerate}
 
 \subsection*{Jadade koonduvus nendes}
 
