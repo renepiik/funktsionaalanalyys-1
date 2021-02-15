@@ -1,0 +1,189 @@
+\documentclass{article}[12pt]
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[estonian]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{latexsym}
+\usepackage{mathpazo}
+\usepackage{mathtools}
+\usepackage{setspace}
+\usepackage{ifthenx}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{import}
+\usepackage{pdfpages}
+\usepackage{transparent}
+\usepackage{xifthen}
+\usepackage{float}
+\usepackage[a4paper, lmargin=0.1666\paperwidth, rmargin=0.1666\paperwidth, tmargin=0.1111\paperheight, bmargin=0.1111\paperheight]{geometry} %margins
+
+\linespread{1.3}
+
+% spacing
+\newcommand{\h}{\hspace{0.2cm}}
+% set symbols
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\K}{\mathbb{K}}
+
+% norm
+\newcommand{\norm}[1]{||#1||}
+
+\newcommand{\toinf}{\rightarrow\infty}
+\newcommand{\limtoinf}[2]{\forall \epsilon > 0 \h \exists N \in \mathbb{N}: k \geq N \Rightarrow \ifthenelse{#2=0}{\left\lvert #1\right\rvert}{\left\lvert #1-#2\right\rvert} <\epsilon}
+
+% Ülesanne
+\newtheorem{yl}{Ülesanne}[section]
+
+% Definitsioon
+\theoremstyle{definition}
+\newtheorem{definition}{Definitsioon}[section]
+
+% Teoreem
+\theoremstyle{definition}
+\newtheorem{theorem}{Teoreem}[section]
+
+% Järeldus
+\newtheorem{jareldus}{Järeldus}[section]
+
+% Muuda default listi stiili
+\setlist{noitemsep}
+\setlist[1]{labelindent=\parindent}
+\setlist[enumerate,1]{label = \arabic*$^\circ$, ref = \arabic*}
+\setlist[enumerate,2]{label = \emph{\alph*}),ref 	= \theenumi.\emph{\alph*}}
+
+\begin{document}
+
+\title{Funktsionaalanalüüs 1}
+\author{René Piik}
+
+\maketitle
+
+\section{Meetrilised ruumid}
+
+Hulk $X$, mille puhul peame silmas kindlat kujutust $d:x\times X\rightarrow \R$, on meetriline ruum, kui $\forall x,y,z\in X$ korral:
+\begin{enumerate}
+	\item $d(x,y)=0 \Leftrightarrow x=y$;
+	\item $d(x,y) = d(y,x)$;
+	\item $d(x,y) + d(y,z) \geq d(x,z)$.
+\end{enumerate}
+Kusjuures viimasest saame tuletada tagurpidi kolmnurga võrratuse.
+\begin{align*}
+	d(x,y) + d(y,z) &\geq d(x,z) \\
+	d(x,y) &\geq d(x,z) - d(y,z) \\
+	d(x,y) &\geq \big\lvert d(x,z) - d(y,z) \big\rvert \h\h\text{(seda tuleb eraldi näidata)} \\
+\end{align*} 
+Saame alati mistahes hulga teisendada meetriliseks ruumiks kasutades kaugust
+\[
+	d(x,y) = \begin{cases}
+		0,\h\h x=y, \\
+		1,\h\h x\neq y
+	\end{cases}
+\]
+Näited:
+\begin{enumerate}
+	\item $X=\R,\h d(x,y) = |x-y|$. Naturaalne kaugus;
+	\item $X=\R,\h d(x,y) = |e^x-e^y|$;
+	\item $X=\R,\h d(x,y) = |\arctan x - \arctan y|$. See kaugu on huvitav, sest maksimaalne kaugus kahe elemendi vahel on $\pi$. Ei esine lõpmatuid kaugusi.
+	\item $X=\R,$
+	\[
+		d(x,y) = \begin{cases}
+			|x-y|,\h\h |x-y| < 1, \\
+			1,\h\h |x-y| \geq 1, \\
+		\end{cases} = \min \{ |x-y|, 1 \};
+	\]
+	\item $X=\N,\h d(m,n) = \bigg\lvert \frac{1}{m} - \frac{1}{n} \bigg\rvert$. Seda kaugust kasutati Googles veebilehtede tähtsuste järjestamisel.
+	\item Hammingu kaugus.
+	Fikseerime $n\in \N$. 
+	Olgu $X$ kõikide pikkusega $n$ binaarjärjendite hulk. 
+	Hammingu kaugus $d(x,y)$ on vastavate erinevate bittide arv.
+	\item Olgu $x=\{0,1\}$. Osutub, et kaugus $d$ iga $x,y\in X$ korral, kus
+	\[
+		d(x,y) = \min \{ k\in \N: x_k \neq y_k \},
+	\]
+	on kaugus. Samuti
+	\[
+		d(x,y) = \sum_{k=1}^\infty \frac{ |x_k-y_k| }{2^k}.
+	\]
+\end{enumerate}
+
+\begin{yl}
+	Olgu $X=\R, d(x,y) = |f(x)-f(y)|$. Leida tingimused, mida funktsioon $f$ peab rahuldama, et $d$ oleks kaugus hulgas $X$.	
+\end{yl}
+
+\subsection*{Koonduvus meetrilises ruumis}
+
+\begin{definition}
+	Öeldakse, et jada $x_n\in X$ koondub elemendiks $x\in X$, kui $\rho(x_n,x)\rightarrow 0$ protsessis $n\rightarrow \infty$.
+	Teisisõnu
+	\[
+		\forall \epsilon > 0 \h\exists N\in \N : n\geq N\Rightarrow d(x_n,x)<\epsilon
+	\]	
+\end{definition}
+\begin{definition}
+	Jada $(x_n)$ nimetatakse statsionaarseks, kui leidub $N$ nii, et sellest kohast alates on kõik jada liikmed ($x_N,x_{N+1},\dots$) võrdsed.
+\end{definition}
+\begin{theorem}
+	Statsionaarne jada koondub alati.
+\end{theorem}
+
+Järeldused:
+\begin{enumerate}
+	\item Koonduval jadal leidub täpselt üks piirelement;
+	\item Koonduva jada iga osajada koondub samaks piirelemendiks;
+	\item (kauguse pidevus) Kui meetrilises ruumis $(X,d)$ $x_n\rightarrow x$ ja $y_n \rightarrow y$, siis $d(x_n,y_n)\rightarrow d(x,y)$.
+\end{enumerate}
+
+\begin{yl}
+	Tõesta, et diskreetses meetrilises ruumis koonduvad ainult statsionaarsed jadad.
+\end{yl}
+
+\section{Normeeritud ruum ja Banachi ruum}
+
+\begin{definition}
+	Vektorruumi $X$ nimetatakse normeeritud ruumiks, kui igale tema elemendile $x\in X$ on vastavusse seatud kindel reaalarv $||x||$, mida nimetatakse elemendi $x$ normiks, nii, et on täidetud tingimused:
+	\begin{enumerate}
+		\item $||x|| = 0 \Leftrightarrow x=0$ (samasuse aksioom);
+		\item $||\lambda x|| = ||\lambda||\cdot ||x||$ (homogeensuse aksioom);
+		\item $||x+y|| \leq ||x|| + ||y||$ (kolmnurga võrratus).
+	\end{enumerate}	
+\end{definition}
+
+\begin{theorem}
+	(Põhiteoreem) Iga normeeritud ruum (NR) on meetriline ruum (MR) kaugusega $\rho(x,y) = ||x-y||$.
+\end{theorem}
+
+\begin{jareldus}
+	\begin{enumerate}
+		\item $\forall x\in X: \norm{x} \geq 0$ ($\norm{x} = \norm{-x}$);
+		\item $\bigg\lvert \norm{x} - \norm{y} \bigg\rvert \leq \norm{x+y}$;
+		\item (skalaariga korrutamise pidevus) Kui $\alpha_n\rightarrow \alpha$ ($\K$) ja $x_n\rightarrow x$ ($X$), siis $\alpha_n x_n\rightarrow \alpha x$ ($X$);
+		\item (liitmise pidevus) Kui $x_n\rightarrow x$ ja $y_n\rightarrow y$, siis $x_n+y_n \rightarrow x+n$.
+	\end{enumerate}
+\end{jareldus}
+
+Täielikku normeeritud ruumi nimetatase Banachi ruumiks. (Mida tähendab täielik normeeritud ruum??)
+
+\section{Klassikalised kaugused ruumis $\K^n$}
+
+Olgu $X=\{(\xi_1,\dots,\xi_n): \xi_k\in\K\}$ kõigi $n$-komponendiliste vektorite hulk.
+Tähistame hulga $X$ elemente $x=(\xi_1,\dots,\xi_n),\h y=(\eta_1,\dots,\eta_n),\h z=(\zeta_1,\dots,\zeta_n)$.
+Sellises hulgas on mitu võimalust kauguse defineerimiseks, vastavalt erinevad ka ruumide tähised.
+\begin{enumerate}
+	\item Ruumis $m_n$ defineeritakse kaugus
+	\[
+		\rho(x,y) = \max_{1\leq k \leq n} |\xi_k-\eta_k|.
+	\]
+\end{enumerate}
+
+\subsection*{Jadade koonduvus neis ruumides}
+
+\section{Klassikalised jadaruumid}
+
+\subsection*{Jadade koonduvus nendes}
+
+\end{document}
