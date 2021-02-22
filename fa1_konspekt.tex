@@ -53,6 +53,10 @@
 \theoremstyle{definition}
 \newtheorem{theorem}{Teoreem}[section]
 
+% Lause
+\theoremstyle{definition}
+\newtheorem{lause}{Lause}[section]
+
 % Järeldus
 \newtheorem{jareldus}{Järeldus}[section]
 
@@ -138,7 +142,7 @@ Näited:
 \subsection*{Koonduvus meetrilises ruumis}
 
 \begin{definition}
-	Öeldakse, et jada $x_n\in X$ koondub elemendiks $x\in X$, kui $\rho(x_n,x)\rightarrow 0$ protsessis $n\rightarrow \infty$.
+	Öeldakse, et jada $x_n\in X$ koondub elemendiks $x\in X$, kui $d(x_n,x)\rightarrow 0$ protsessis $n\rightarrow \infty$.
 	Teisisõnu
 	\[
 		\forall \epsilon > 0 \h\exists N\in \N : n\geq N\Rightarrow d(x_n,x)<\epsilon
@@ -174,7 +178,7 @@ Järeldused:
 \end{definition}
 
 \begin{theorem}
-	(Põhiteoreem) Iga normeeritud ruum (NR) on meetriline ruum (MR) kaugusega $\rho(x,y) = ||x-y||$.
+	(Põhiteoreem) Iga normeeritud ruum (NR) on meetriline ruum (MR) kaugusega $d(x,y) = ||x-y||$.
 \end{theorem}
 
 \begin{jareldus}
@@ -196,7 +200,7 @@ Tarvilik tingimus: iga $M>0$ korral leiduvad punktid $x,y\in X$ nii, et $d(x,y) 
 Tarvilik ja piisav tingimus: $d$ on indutseeritud normi poolt parajasti siis, kui kehtivad kaks tingimust:
 \begin{enumerate}
 	\item $\forall x,y,z\in X :\h d(x,y) = d(x+z,y+z)$;
-	\item $\forall \alpha\in \K \forall x,y\in X: \h d(x\alpha,y\alpha) = |\alpha|d(x,y)$.
+	\item $\forall \alpha\in \K \h\forall x,y\in X: \h d(x\alpha,y\alpha) = |\alpha|d(x,y)$.
 \end{enumerate}
 Sel juhul see norm on defineeritud seosega $\norm{x} = d(x,0)$.
 
@@ -207,38 +211,39 @@ Sellises hulgas on mitu võimalust kauguse defineerimiseks, vastavalt erinevad k
 \begin{enumerate}
 	\item Ruumis $m_n$ defineeritakse kaugus
 	\[
-		\rho(x,y) = \max_{1\leq k \leq n} |\xi_k-\eta_k|.
+		d(x,y) = \max_{1\leq k \leq n} |\xi_k-\eta_k|.
 	\]
 	Aksioomide kontroll.
 	\begin{enumerate}
-		\item $\rho(x,y) = 0 \Leftrightarrow x=y$.
+		\item $d(x,y) = 0 \Leftrightarrow x=y$.
 		Tarvilikus on ilmne. 
 		Piisavus. 
 		Olgu $\max_{1\leq k \leq n} |\xi_k-\eta_k| = 0$. 
 		Siis peavad mõlema vektori kõik koordinaadid olema võrdsed, millest järeldub, et ka vektorid ise on võrdsed.
-		\item $\rho(x,y) = \rho(y,x)$.
-		Absoluutväärtuse märgi tõttu pole vahet, kumb punkt võetakse "esimeseks".
-		\item $\rho(x,y) \leq \rho(x,z) + \rho(z,y)$.
+		\item $d(x,y) = d(y,x)$.
+		Absoluutväärtuse märgi tõttu pole oluline, kumb punkt võetakse "esimeseks".
+		\item $d(x,y) \leq d(x,z) + d(z,y)$.
 		Iga indeksi korral
 		\begin{align*}
-			|\xi_k-\eta_k| &= |\xi_k-\zeta_k+\zeta_k-\eta_k| \\
+			d(x,y) &= |\xi_k-\eta_k| \\
+			&= |\xi_k-\zeta_k+\zeta_k-\eta_k| \\
 			&\leq |\xi_k-\zeta_k|+|\zeta_k-\eta_k| \\
-			&\leq \rho(x,z) + \rho(z,y).
+			&\leq d(x,z) + d(z,y).
 		\end{align*}
 		Leides maksimumi $k$ järgi, saamegi kolmnurga võrratuse.
 	\end{enumerate}
 	\item Olgu $1\leq p \leq \infty$.
 	Ruumis $l_p^n$ defineeritakse kaugus
 	\[
-		\rho(x,y) = \left( \sum_{k=1}^n |\xi_k - \eta_k|^p \right)^{\frac{1}{p}}.
+		d(x,y) = \left( \sum_{k=1}^n |\xi_k - \eta_k|^p \right)^{\frac{1}{p}}.
 	\]
-	Olulised erijuhud on $l_1^n$, kus $\rho(x,y) = \sum_{k=1}^n |\xi_k-\eta_k|$ ja $l_2^n$.
+	Olulised erijuhud on $l_1^n$, kus $d(x,y) = \sum_{k=1}^n |\xi_k-\eta_k|$ ja $l_2^n$.
 	Viimast ruumi tähistatakse ka $\R^n$ või $\C^n$, üldiselt $\K^n$.
 	Ruum $\R^n$ on $n$-mõõtmeline eukleidiline ruum.
 
 	Kauguse aksioomide $1^\circ$ ja $2^\circ$ kehtimist pole raske kontrollida.
 	Aksioomi $3^\circ$ kehtivus järeldub näiteks ruumis $l_1^n$ absoluutväärtuse või mooduli omadustest, kuid kõrgema astme ruumide korral on see keerulisem.
-	Kasutame üldjuhul viimase tingimuse tõestamiseks \textbf{Hölderi võrratust}.
+	Kasutame üldjuhul viimase tingimuse tõestamiseks \textbf{Hölderi võrratust} ja \textbf{Minkowski võrratust}.
 \end{enumerate}
 
 \begin{theorem}
@@ -250,12 +255,11 @@ Sellises hulgas on mitu võimalust kauguse defineerimiseks, vastavalt erinevad k
 	\[
 		\sum_{k=1}^n |a_k b_k| \leq \left( \sum_{k=1}^n |a_k|^p \right)^{\frac{1}{p}} \cdot \left( \sum_{k=1}^n |b_k|^q \right)^{\frac{1}{q}}.
 	\]
-	Teistmoodi saaks kirjutada
+	Teisiti saaks kirjutada
 	\[
-		\norm{(a_1b_1,\dots,a_nb_n)} \leq \norm{(a_1,\dots,a_n)}_p \cdot \norm{(b_1,\dots,b_n)}_q.
+		\norm{(a_1b_1,\dots,a_nb_n)}_1 \leq \norm{(a_1,\dots,a_n)}_p \cdot \norm{(b_1,\dots,b_n)}_q.
 	\]
 \end{theorem}
-Samuti peaks teadma \textbf{Minkowski võrratust}.
 \begin{theorem}
 	(Minkowski võrratus) Kui $a_k,b_k\in \K,\h k=1,\dots,n$ ja $1<p<\infty$, siis kehtib võrratus
 	\[
@@ -276,26 +280,132 @@ Samuti peaks teadma \textbf{Minkowski võrratust}.
 	Selle ülesande tulemuse järgi on kaugus ruumis $m_n$ ruumide $l_p^n$ kauguste piirjuht, mistõttu on õigustatud tähistus $m_n = l_\infty^n$.
 \end{yl}
 
-\subsection*{Jadade koonduvus neis ruumides}
+\subsection*{Jadade koonduvus}
 
 Osutub, et ruumis $(\K_n, \norm{\cdot}_p)$, kus $1\leq p\leq \infty$, $x_n\rightarrow x$\dots
 
 \section{Klassikalised jadaruumid}
 
-Siin vaatleme jadaruume, kus meetrilise ruumi $X$ elementideks on arvjadad $(\xi_k),\xi_k\in\K$.
+Siin vaatleme jadaruume, kus meetrilise ruumi $X$ elementideks on arvjadad $(\xi_k)$, $\xi_k\in\K$.
 Tähistame ruumi $X$ elemente $x=(\xi_k),y=(\eta_k),z=(\zeta_k)$.
 \begin{enumerate}
 	\item Tõkestatud jadade ruum $m$ on hulgana kirjeldatav:
 	\[
-		m=\{ (\xi_k):\xi_k\in\K,\sup_k |\xi_k|<\infty \},
+		m=\{ (\xi_k):\xi_k\in\K,\h\sup_k |\xi_k|<\infty \},
 	\]
-	s.t. $x\in m$ parajasti siis, kui leidub arv $M$ (mis võib sõltuda elemendist $x$) nii, et $|\xi_k|\leq M$.
+	s.t. $x=(\xi_k)\in m$ parajasti siis, kui leidub arv $M$ (mis võib sõltuda elemendist $x$) nii, et $|\xi_k|\leq M$.
+	Kasutatakse ka tähistust $m=l_\infty$.
 	Ruumis $m$ defineeritakse kaugus võrdusega
 	\[
-		\rho(x,y) = \sup_k |\xi_k-\eta_k|.
+		d(x,y) = \sup_k |\xi_k-\eta_k|.
 	\]
+	Kui $x,y\in m$, siis $\exists M,N\in\R$ nii, et $|\xi_k|\leq M$ ja $|\eta_k|\leq N$ iga $k\in\N$ korral, ning
+	\[
+		|\xi_k-\eta_k|\leq |\xi_k|+|\eta_k|\leq M+N,
+	\]
+	seega
+	\[
+		\sup_k |\xi_k-\eta_k| \leq M+N.
+	\]
+	\item Koonduvate jadade ruum $c$ on hulk
+	\[
+		c=\{ (\xi_k):\xi_k\in\K,\h\exists\lim_k \xi_k\in\K \}.
+	\]
+	Koonduv jada on tõkestatud, s.t. $c\subset m$.
+	Kaugus ruumis $c$ defineeritakse nagu ruumis $m$, mistõttu ruum $c$ on ruumi $m$ alamruum.
+	\item Nulliks koonduvate jadade ruum $c_0$ on hulk
+	\[
+		c_0= \{ (\xi_k):\xi_k\in\K,\h\lim_k\xi_k = 0 \}.
+	\]
+	Kaugus selles ruumis defineeritakse veelkord samamoodi nagu ruumis $m$.
+	Seega kehtib $c_0\subset c\subset m$, kusjuures on tegu teineteise alamruumidega.
+	\item Olgu $1\leq p < \infty$. 
+	Ruum $l_p$ on hulk
+	\[
+		l_p = \{ (\xi_k):\xi_k\in\K,\h \sum_{k=1}^\infty |\xi_k|^p < \infty \},
+	\]
+	milles kaugus defineeritakse võrdusega
+	\[
+		d(x,y) = \left( \sum_{k=1}^\infty |\xi_k-\eta_k|^p \right)^{\frac{1}{p}}.
+	\]
+	Kauguse aksioomide $1^\circ$ ja $2^\circ$ kehtivus on ilmne.
+	Kolmnurga võrratuse põhjendamiseks kasutame kolmnurga võrratust ruumis $l_p^n$, misjärel võtame vasakul piirväärtuse $n\rightarrow \infty$.
+	Kehtivad hulgateoreetilised sisalduvused $l_1\subset l_p \subset l_q \subset c_0$, kus $1\leq p \leq q < \infty$, kuid siin ei ole tegemist alamruumidega meetriliste ruumide mõttes.
+	Samuti nagu ka $l_p^n$ ja $m_n$ kauguste kohta, saab ka siin tõestada, et
+	\[
+		\lim_{p\rightarrow \infty} \left( \sum_{k=1}^\infty |\xi_k|^p \right)^{\frac{1}{p}} = \sup_k |\xi_k|,\h (\xi_k)\in \bigcup_{p\geq 1} l_p,
+	\]
+	mispärast kasutatakse mõnikord tähistust $c_0=l_\infty$.
+	\item Kõigi arvjadade ruumis $s = \{ (\xi_k):\xi_k\in \K \}$ antakse kaugus
+	\[
+		d(x,y) = \sum_{k=1}^\infty \frac{1}{2^k} \frac{ |\xi_k-\eta_k| }{1 + |\xi_k-\eta_k| }.
+	\]
+	Kuna $\frac{ |\xi_k-\eta_k| }{1 + |\xi_k-\eta_k| } < 1$, siis kauguse definitsioonis esinev rida koondub. Paneme tähele, et iga elemendipaari $x,y$ korral $d(x,y)<1$ ruumis $s$.
+
+	Jällegi on esimese ja teise kauguse aksioomi näitamine lihtne, kolmanda kirjutame välja.
+	Olgu funktsioon $\phi(t) = \frac{t}{1+t},\h t\geq 0$. Siis $\phi'(t) = \frac{1}{(1+t)^2}>0$, mistõttu funktsioon $\phi$ on kasvav. 
+	Seepärast mistahes $a,b\in\K$ korral
+	\begin{align*}
+		\frac{ |a+b| }{ 1+|a+b| } &\leq \frac{ |a|+|b| }{ 1+|a|+|b| } \\
+		&= \frac{ |a| }{ 1+|a|+|b| } + \frac{ |b| }{ 1+|a|+|b| } \\
+		&\leq \frac{ |a| }{ 1+|a| } + \frac{ |b| }{ 1+|b| },
+	\end{align*}
+	mistõttu
+	\begin{align*}
+		\frac{ |\xi_k-\eta_k| }{ 1+|\xi_k-\eta_k| } &= \frac{ |\xi_k-\zeta_k+\zeta_k-\eta_k| }{ 1+|\xi_k-\zeta_k+\zeta_k-\eta_k| } \\
+		&\leq \frac{ |\xi_k-\zeta_k| }{ 1+|\xi_k-\zeta_k| } + \frac{ |\zeta_k-\eta_k| }{ 1+|\zeta_k-\eta_k| }.
+	\end{align*}
+	Saadud võrratusi teguriga $\frac{1}{2^k}$ korrutdes ja $k$ järgi summeerides saamegi tulemuseks kolmnurga võrratuse ruumis $s$.
 \end{enumerate}
 
-\subsection*{Jadade koonduvus nendes}
+\subsection*{Jadade koonduvus}
+
+\begin{enumerate}
+	\item (Ruum $m$) Kui $\N\ni x_n=(\xi_k^n)_{k=1}^\infty,\h n=1,2,\dots$ ja $x=(\xi_k)$, siis koondumine $x_n\rightarrow x$ on samaväärne sellega, et $\sup_k |\xi_k^n-\xi_k| \rightarrow_n 0$, mis on omakorda väljendatav järgmiselt:
+	\[
+		\forall \epsilon > 0 \h \exists N: |\xi_k^n-\xi_k|\leq \epsilon,\h n>N,\h k=1,2,\dots .
+	\]
+	Kokkuvõttes tähendab koondumine ruumis $m$ koordinaatide ühtlast koondumist.
+	\setcounter{enumi}{3}
+	\item Kauguse definitsioonis esineva rea koonduvuse põhjendame Minkowski võrratuse abil.
+	Kuna
+	\begin{align*}
+		\left( \sum_{k=1}^\infty |\xi_k-\eta_k|^p \right)^\frac{1}{p} &\leq \left( \sum_{k=1}^\infty |\xi_k|^p \right)^\frac{1}{p} + \left( \sum_{k=1}^\infty |\eta_k|^p \right)^\frac{1}{p} \\
+		&\leq \left( \sum_{k=1}^\infty |\xi_k|^p \right)^\frac{1}{p} + \left( \sum_{k=1}^\infty |\eta_k|^p \right)^\frac{1}{p} < \infty, \\
+		&\textit{(miks siin sama rida kaks korda on???)}
+	\end{align*}
+	siis osasummade jada $\sum_{k=1}^n |\xi_k-\eta_k|^p$, $n=1,2,\dots$ on tõkestatud ning rida koondub.
+	\begin{lause}
+		Kui $x_n=(\xi_k^n)_{k=1}^\infty,\h n=1,2,\dots$ ja $x=(\xi_k)$, siis koondumine $x_n\rightarrow x$ ruumis $l_p$ on samaväärne järgmiste tingimuste samaaegse kehtimisega:
+		\begin{enumerate}
+			\item $\xi_k^n \rightarrow_n \xi_k,\h k=1,2,\dots$ (koordinaatide koondumine)
+			\item $\forall \epsilon > 0\h\exists K: \sum_{k=K+1}^\infty |\xi_k^n|^p<\epsilon,\h n=1,2,\dots$ (read $\sum_{k=1}^\infty |\xi_k^n|^p$ koonduvad ühtlaselt $n$ suhtes).
+		\end{enumerate}
+	\end{lause}
+	\item \begin{lause}
+		Koondumine $x_n\rightarrow x$ ruumis $s$ on samaväärne koordinaatide koondumisega.
+	\end{lause}
+\end{enumerate}
+
+\section{Klassikalised funktsiooniruumid}
+
+\begin{enumerate}
+	\item Ruum $M[a,b]$ on kõigi lõigus $[a,b]$ tõkestatud funktsioonide hulk kaugusega
+	\[
+		d(x,y) = \sup_{a\leq t \leq b} |x(t)-y(t)|
+	\]
+	Ka siin (nagu ruumi $m$ korral) saab näidata, et sellise definitsiooniga seatakse funktsioonipaarile $x,y$ vastavusse reaalarv.
+
+
+\end{enumerate}
+
+\subsection*{Jadade koonduvus}
+
+\begin{enumerate}
+	\item Koondumine $x_n\rightarrow x$ ruumis $M[a,b]$ on funktsioonide jada $x_n$ ühtlane koondumine funktsiooniks $x$ lõigul $[a,b]$, s.t.
+	\[
+		\forall\epsilon>0\h\exists N: n>N\Rightarrow |x_n(t)-x(t)|<\epsilon,\h t\in[a,b].
+	\]
+\end{enumerate}
 
 \end{document}
