@@ -20,6 +20,20 @@
 
 % formatting section headings
 \usepackage{titlesec}
+
+% font
+\usepackage{clara}
+
+% for pdf hyperlink functionality
+% MUST BE LAST IMPORTED PACKAGE
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+  linkcolor=black,
+  filecolor=magenta,      
+  urlcolor=cyan,
+}
+
 \titleformat{\section}[block]{\Large\bfseries\filcenter}{\newpage\thesection}{1em}{}[\vspace{2ex}]
 \titleformat{\subsection}{\large\bfseries\filcenter}{\thesubsection}{1em}{}[\vspace{1ex}]
 
@@ -60,6 +74,13 @@
 % Järeldus
 \newtheorem{jareldus}{Järeldus}[section]
 
+\newtheoremstyle{break}
+  {\topsep}{\topsep}%
+  {\bfseries}{}%
+  {\newline}{}%
+\theoremstyle{break}
+\newtheorem*{toestus}{Tõestus}
+
 % Muuda default listi stiili
 \setlist{noitemsep}
 \setlist[1]{labelindent=\parindent}
@@ -87,13 +108,13 @@ Semestri lõpus saab ühe kontrolltöödest uuesti teha, kirja läheb sel juhul 
 
 \tableofcontents
 
-\section{Meetrilised ruumid}
+\section{Meetriline ruum, normeeritud ruum ja Banachi ruum}
 
-Hulk $X$, mille puhul peame silmas kindlat kujutust $d:x\times X\rightarrow \R$, on meetriline ruum, kui $\forall x,y,z\in X$ korral:
+Hulk $X$, mille puhul peame silmas kindlat kujutust $d: X\times X\rightarrow \R$, on meetriline ruum, kui $\forall x,y,z\in X$ korral:
 \begin{enumerate}
-	\item $d(x,y)=0 \Leftrightarrow x=y$;
-	\item $d(x,y) = d(y,x)$;
-	\item $d(x,y) + d(y,z) \geq d(x,z)$.
+	\item $d(x,y)=0 \Leftrightarrow x=y$; \hfill (identsus)
+	\item $d(x,y) = d(y,x)$; \hfill (sümmeetria)
+	\item $d(x,y) + d(y,z) \geq d(x,z)$. \hfill (kolmnurga võrratus)
 \end{enumerate}
 Kusjuures viimasest saame tuletada tagurpidi kolmnurga võrratuse.
 \begin{align*}
@@ -139,7 +160,7 @@ Näited:
 	Olgu $X=\R, d(x,y) = |f(x)-f(y)|$. Leida tingimused, mida funktsioon $f$ peab rahuldama, et $d$ oleks kaugus hulgas $X$.	
 \end{yl}
 
-\subsection*{Koonduvus meetrilises ruumis}
+\subsection{Koonduvus meetrilises ruumis}
 
 \begin{definition}
 	Öeldakse, et jada $x_n\in X$ koondub elemendiks $x\in X$, kui $d(x_n,x)\rightarrow 0$ protsessis $n\rightarrow \infty$.
@@ -166,7 +187,7 @@ Järeldused:
 	Tõesta, et diskreetses meetrilises ruumis koonduvad ainult statsionaarsed jadad.
 \end{yl}
 
-\section{Normeeritud ruum ja Banachi ruum}
+\subsection{Normeeritud ruum ja Banachi ruum}
 
 \begin{definition}
 	Vektorruumi $X$ nimetatakse normeeritud ruumiks, kui igale tema elemendile $x\in X$ on vastavusse seatud kindel reaalarv $||x||$, mida nimetatakse elemendi $x$ normiks, nii, et on täidetud tingimused:
@@ -280,7 +301,7 @@ Sellises hulgas on mitu võimalust kauguse defineerimiseks, vastavalt erinevad k
 	Selle ülesande tulemuse järgi on kaugus ruumis $m_n$ ruumide $l_p^n$ kauguste piirjuht, mistõttu on õigustatud tähistus $m_n = l_\infty^n$.
 \end{yl}
 
-\subsection*{Jadade koonduvus}
+\subsection{Jadade koonduvus}
 
 Osutub, et ruumis $(\K_n, \norm{\cdot}_p)$, kus $1\leq p\leq \infty$, $x_n\rightarrow x$\dots
 
@@ -358,7 +379,7 @@ Tähistame ruumi $X$ elemente $x=(\xi_k),y=(\eta_k),z=(\zeta_k)$.
 	Saadud võrratusi teguriga $\frac{1}{2^k}$ korrutdes ja $k$ järgi summeerides saamegi tulemuseks kolmnurga võrratuse ruumis $s$.
 \end{enumerate}
 
-\subsection*{Jadade koonduvus}
+\subsection{Jadade koonduvus}
 
 \begin{enumerate}
 	\item (Ruum $m$) Kui $\N\ni x_n=(\xi_k^n)_{k=1}^\infty,\h n=1,2,\dots$ ja $x=(\xi_k)$, siis koondumine $x_n\rightarrow x$ on samaväärne sellega, et $\sup_k |\xi_k^n-\xi_k| \rightarrow_n 0$, mis on omakorda väljendatav järgmiselt:
@@ -395,11 +416,37 @@ Tähistame ruumi $X$ elemente $x=(\xi_k),y=(\eta_k),z=(\zeta_k)$.
 		d(x,y) = \sup_{a\leq t \leq b} |x(t)-y(t)|
 	\]
 	Ka siin (nagu ruumi $m$ korral) saab näidata, et sellise definitsiooniga seatakse funktsioonipaarile $x,y$ vastavusse reaalarv.
+	\item Ruum $C[a,b]$ on kõigi lõigus $[a,b]$ pidevate funktsioonide hulk, kus kaugus defineeritakse nagu ruumis $M[a,b]$. 
+	Selline kauguse definitsioon on korrektne, sest lõigus pidev funktsioon on ka seal tõkestatud.
+	Järelikult $C[a,b]\subset M[a,b]$, kusjuures esimene on teise alamruum.
+	Kuna lõigus pidev funktsioon saavutab supreemumi, võib kirjutada $x,y\in C[a,b]$ korral
+	\[
+		d(x,y) = \max_{a\leq t\leq b} |x(t)-y(t)|.
+	\]
+	\item Ruum $C^n[a,b]$ on kõigi lõigus $n$ korda pidevalt diferentseeruvate funktsioonide hulk, s.t.
+	\[
+		C^n[a,b] = \{x:x^{(n)}\in C[a,b]\},
+	\]
+	kaugusega
+	\[
+		d(x,y) = \sum_{k=0}^n \max_{a\leq t\leq b} |x^{(k)}(t) - y^{(k)}(t)|,
+	\]
+	kus loeme $x^{(0)}(t) = x(t)$.
+	Ruum $C^n[a,b]$ on küll osahulk ruumis $C[a,b]$, aga mitte alamruum, sest tema meetrika erineb ruumi $C[a,b]$ meetrikast.
+	\item Olgu $1\leq p < \infty$. Ruum $L_p(a,b)$ on kõigi funktsioonide $x=x(t)$ hulk, mille korral eksisteerib lõplik Lebesgue'i integraal
+	\[
+		\int_a^b |x(t)|^p dt,
+	\]
+	kaugusega
+	\[
+		d(x,y) = \left( \int_a^b |x(t) - y(t)|^p \right)^{\frac{1}{p}}.
+	\]
+	Võrdsus $x=y$ tähendab ruumis $L_p(a,b)$ seda, et $x(t) = y(t)$ peaaegu kõikjal ruumis $[a,b]$.
 
-
+	Kauguse esimene aksioom on täidetud, sest samastame needsamad "peaaegu kõikjal ühtivad funktsioonid".
 \end{enumerate}
 
-\subsection*{Jadade koonduvus}
+\subsection{Jadade koonduvus}
 
 \begin{enumerate}
 	\item Koondumine $x_n\rightarrow x$ ruumis $M[a,b]$ on funktsioonide jada $x_n$ ühtlane koondumine funktsiooniks $x$ lõigul $[a,b]$, s.t.
@@ -407,5 +454,268 @@ Tähistame ruumi $X$ elemente $x=(\xi_k),y=(\eta_k),z=(\zeta_k)$.
 		\forall\epsilon>0\h\exists N: n>N\Rightarrow |x_n(t)-x(t)|<\epsilon,\h t\in[a,b].
 	\]
 \end{enumerate}
+
+\section{Hulgad meetrilistes ruumides}
+
+Olgu $X$ meetriline ruum.
+
+\begin{definition}
+	Olgu $a\in X$ ja $r>0$. Hulka
+	\[
+		B(a,r) = \{ x\in X: d(x,a) < r \}
+	\]
+	nimetatakse lahtiseks keraks ja hulka
+	\[
+		\overline{B}(a,r) = \{ x\in X: d(x,a) \leq r \}
+	\]
+	kinniseks keraks.
+	Element $a$ on siinkohal kera keskpunkt ja $r$ selle raadius.
+\end{definition}
+
+\begin{lause}
+	Kui $r_1\leq r_2$, siis $B(a,r_1)\subset B(a,r_2)$ ja $\overline{B}(a,r_1)\subset \overline{B}(a,r_2)$.
+\end{lause}
+
+\begin{definition}
+	Hulka $G\subset X$ nimetatakse lahtiseks, kui hulga $G$ igale punktile leidub teda ümbritsev lahtine kera, mis sisaldub hulgas $G$.
+\end{definition}
+
+\begin{lause}
+	Hulk $G$ on lahtine parajasti siis, kui hulga $G$ igal punktil leidub ümbrus, mis sisaldub hulgas $G$.
+\end{lause}
+
+\begin{definition}
+	Hulga $A$ elementi $a$ nimetatakse hulga $A$ sisepunktiks, kui punktil $a$ leidub ümbrus, mis sisaldub hulgas $A$.
+\end{definition}
+
+\begin{lause}
+	Hulk $G$ on lahtine parajasti siis, kui hulga $G$ kõik punktid on tema sisepunktid.
+\end{lause}
+
+\begin{lause}
+	Lahtine kera on lahtine hulk.
+\end{lause}
+
+\begin{lause}
+	Mistahes hulga lahtiste hulkade ühend on lahtine.
+\end{lause}
+\begin{toestus}
+	Olgu hulgad $G_\alpha$ lahtised.
+	Valime vabalt $x\in \bigcup_\alpha G_\alpha$.
+	Siis leidub selline indeks $\alpha_0$, et $x\in G_{\alpha_0}$.
+	Hulk $G_{\alpha_0}$ on lahtine, mistõttu leidub $B(x,r)\subset G_{\alpha_0}$.
+	Siis aga $B(x,r)\subset \bigcup_\alpha G_{\alpha}$, mis tähendab, et $x$ on hulga $\bigcup_\alpha G_\alpha$ sisepunkt.
+	Seega on hulk $\bigcup_\alpha G_\alpha$ lahtine.
+\end{toestus}
+
+\begin{lause}
+	Lõpliku hulga lahtiste hulkade ühisosa on lahtine.
+\end{lause}
+Üldiselt ei kehti, et lõpmatu arvu lahtiste hulkade ühend on lahtine.
+Näiteks võttes ruumiks $\R$ ja vahemikeks $\bigcap_{n=1}^\infty \left( -\frac{1}{n} ,\frac{1}{n}\right)=\{ 0 \}$.
+Hulk $\{ 0 \}$ pole lahtine, sest mistahes raadiuse $r>0$ korral ei sisaldu vastav lahtine kera selles hulgas.
+
+\begin{definition}
+	Ruumi punkti nimetatakse hulga $A\subset X$ rajapunktiks, kui tema iga ümbrus sisaldab nii hulga $A$ punkte kui ka tema täiendhulga $X\setminus A$ punkte.
+\end{definition}
+
+\begin{definition}
+	Hulka nimetatakse kinniseks, kui ta sisaldab kõik oma rajapunktid.
+\end{definition}
+
+\begin{theorem}
+	Hulk on kinnine parajasti siis, kui tema täiend on lahtine.
+\end{theorem}
+
+\begin{lause}
+	Mistahes hulga kinniste hulkade ühisosa on kinnine.
+\end{lause}
+
+\begin{lause}
+	Lõpliku hulga kinniste hulkade ühend on kinnine.
+\end{lause}
+
+Leidub ka hulki, mis pole lahtised ega kinnised, näiteks poollõik $(0,1]$ ruumis $\R$.
+
+\begin{theorem}
+	Hulk meetrilises ruumis on kinnine parajasti siis, kui iga tema elementidest moodustatud koonduva jada piirelement kuulub sellesse hulka.
+\end{theorem}
+\begin{toestus}
+	Piisavus.
+	Olgu hulk $A$ kinnine ja $x_n\rightarrow x,\h x_n\in A$.
+	Oletame vastuväiteliselt, et $x\in X\setminus A$, siis hulga $X\setminus A$ lahtisuse tõttu leidub kera $B(x,r)\in X\setminus A$.
+	Siis peaks koondumise $d(x_n,x)\rightarrow 0$ tõttu leiduma $N$ nii, et iga $n>N$ korral $x_n\in B(x,r)\subset X\setminus A$.
+	See on aga vastuolus sisaldusega $x_n\in A$.
+	Seega $x\in A$.
+
+	Tarvilikkus. Olgu $x$ hulga $A$ rajapunkt.
+	Siis iga $n\in\N$ korral $B(x,\frac{1}{n})$ sisaldab $A$ punkte. 
+	Valime $x_n\in B(x,\frac{1}{n})\cap A$.
+	Sellega saame, et $d(x_n,x)<\frac{1}{n}\rightarrow 0$, s.t. $x_n\rightarrow x$.
+	Kuna samal ajal $x_n\in A$, siis $x\in A$ ja $A$ on kinnine.
+\end{toestus}
+
+\begin{lause}
+	Kinnine kera on kinnine hulk.
+\end{lause}
+
+\begin{lause}
+	Sfäär $S(a,r)=\{ x\in X:d(x,a) = r \}$ on kinnine hulk.
+\end{lause}
+
+\begin{theorem}
+	Kui $A\subset X$ ja $x\in X$, siis järgmised tingimused on samaväärsed:
+	\begin{enumerate}
+		\item $x\in \overline{A}$;
+		\item $\exists y_n\in A:\h y_n\rightarrow x$;
+		\item $\forall \epsilon > 0 \h \exists y\in A:\h d(x,y)<\epsilon$.
+	\end{enumerate}
+\end{theorem}
+
+\section{Separaablid meetrilised ruumid}
+
+Olgu $X$ meetriline ruum.
+\begin{definition}
+	Hulk $A\subset X$ on kõikjal tihe (ruumis $X$), kui $\overline{A} = X$.
+\end{definition}
+
+\begin{lause}
+	Kui $A\subset X$, siis järgmised tingimused on samaväärsed:
+	\begin{enumerate}
+		\item $A$ on kõikjal tihe;
+		\item $\forall x\in X\h\exists y_n\in A:\h y_n\rightarrow x$;
+		\item $\forall x\in X\h\forall \epsilon > 0 \h \exists y\in A:\h d(x,y)<\epsilon$.
+	\end{enumerate}
+\end{lause}
+
+\begin{definition}
+	Meetrilist ruumi nimetatakse separaabliks, kui temas leidub kõikjal tihe ülimalt loenduv hulk.
+\end{definition}
+
+Ruumid $m_n$ ja $l_p^n$ on separaablid, kõikjal tihedaks leonduvaks hulgaks $A$ võib võtta kõigi ratsionaalsete komponentidega vektorite hulga.
+Kui on tegemist reaalsete ruumidega, siis
+\[
+	A=\{ (\eta_1,\dots, \eta_n):\eta_k\in\Q \},
+\]
+komplekssel juhul aga
+\[
+	A=\{ (\eta_1,\dots, \eta_n):\eta_k = \alpha_k + i\beta_k,\h \alpha_k, \beta_k\in\Q \}.
+\]
+Nende hulkade $A$ kõikjal tihedus ruumides $m_n$ ja $l_p^n$ üldistab võrdust $\overline{\Q} = \R$.
+
+Ainus vaadeldud jadaruumidest, mis pole separaabel, on tõkestatud jadade ruum $m$.
+
+\begin{yl}
+	Näitame, et ruum $l_p$ on separaabel.
+\end{yl}
+
+Peame selleks näitama, et mistahes ruumi elemendi $x$ ja positiivse $\epsilon$ korral leidub hulga $A$ element, mille kaugus elemendist $x$ on väiksem kui $\epsilon$.
+	
+Esiteks, hulgad 
+\[
+	A_n = \{ (\eta_1,\dots, \eta_n,0,\dots):\eta_k\in\Q \}
+\]
+on loenduvad.
+Seega ka hulk $A=\bigcup_{n=1}^\infty A_n$ on loenduv.
+Valime vabalt $x=(\xi_k)\in l_p$ ja $\epsilon > 0$.
+Olgu arv $n$ selline, et
+\[
+	\sum_{k=n+1}^\infty | \xi_k|^p < \left(\frac{\epsilon}{2}\right)^p.
+\]
+Tähistame $x_n = (\xi_1,\dots,\xi_n,0,\dots)$. 
+Siis
+\[
+	d(x,x_n) = \left(\sum_{k=n+1}^\infty | \xi_k|^p\right)^\frac{1}{p} < \frac{\epsilon}{2}.
+\]
+Seejärel valime
+\[
+	y = (\eta_1,\dots,\eta_n,0,\dots)\in A_n\subset A
+\]
+nii, et
+\[
+	d(x_n,y) = \left(\sum_{k=1}^\infty | \xi_k-\eta_k |^p\right)^\frac{1}{p} < \frac{\epsilon}{2}.
+\]
+Kuna $d(x,y) \leq d(x,x_n) + d(x_n, y) < \epsilon$, siis $A$ on kõikjal tihe ruumis $l_p$.
+
+Sama mõttekäiguga saab tõestada, et ruumid $c_0, c$ ja $s$ on separaablid.
+
+Funktsionaalruumidest, mida vaatasime, pole separaabel ainult ruum $M[a,b]$.
+
+\begin{yl}
+	Näidata, et diskreetne meetriline ruum on separaabel parajasti siis, kui tema elementide hulk on ülimalt loenduv.
+\end{yl}
+
+\begin{yl}
+	Tõestada, et separaabli ruumi alamruum on separaabel.
+\end{yl}
+
+\section{Täielikud meetrilised ruumid}
+\begin{definition}
+	Meetrilise ruumi elementide jada $x_n$ nimetatakse Cauchy jadaks ehk fundamentaaljadaks, kui $d(x_n,x_m)\rightarrow 0$ protsessis $n,m\rightarrow 0$.
+	\[
+		\forall \epsilon > 0\h\exists N\in\N: \h n,m>N\Rightarrow d(x_n,x_m) < \epsilon.
+	\]
+\end{definition}
+
+\begin{lause}
+	Iga koonduv jada on Cauchy jada.
+\end{lause}
+
+\begin{definition}
+	Meetrilist ruumi nimetatakse täielikuks, kui temas iga Cauchy jada koondub.
+\end{definition}
+
+Kuna reaalarvude ruumis $\R$ iga Cauchy jada koondub, siis on $\R$ täielik.
+Vaatleme ruumi $\Q$ sama kaugusega, mis $\R$-il.
+S.t., et $\Q$ on $\R$ alamruum.
+Valime $x_n\in \Q$ nii, et $x_n\rightarrow \pi$.
+Siis $x_n$ on Cauchy jada, ta koondub ruumis $\R$, aga ei koondu ruumis $\Q$, sest $\pi\notin \Q$. Seega ruum $\Q$ ei ole täielik.
+
+Jada fundamentaalsus on jada sisemine omadus, jada koonduvus on aga seotud tingimata mingi kindla ruumiga.
+
+\begin{yl}
+	Näidata, et kui fundamentaaljada $x_n$ mingi osajada koondub elemendiks $x$, siis ka jada $x_n$ koondub samaks elemendiks $x$.
+\end{yl}
+
+\begin{theorem}
+	Meetrilise ruumi täielik alamruum on kinnine. 
+	Täieliku meetrilise ruumi kinnine alamruum on täielik.
+\end{theorem}
+
+
+\begin{toestus}
+	\begin{enumerate}
+		\item[]
+		\item Olgu $A$ meetrilise ruumi täielik alamruum.
+		Vaatleme jada $x_n\in A,x_n\rightarrow x$.
+		Kuna $(x_n)$ on Cauchy jada ruumis $A$, siis ta koondub ruumis $A$.
+		Seega $x\in A$.
+		\item Olgu $X$ täielik meetriline ruum ja $A$ tema kinnine alamruum.
+		Vaatleme Cauchy jada $(x_n)\in A$.
+		Jada $(x_n)$ koondub ruumis $X$.
+		Kuna $A$ on kinnine, siis jada $(x_n)$ piirelement kuulub alamruumi $A$.
+		Seega koondub $x_n$ ruumis $A$ ehk $A$ on täielik.
+	\end{enumerate}
+\end{toestus}
+
+Eelnevalt vaadeldud ruumis on kõik täielikud.
+Vaatleme näiteks ruume $m_n$ ja $l_p^n$.
+
+Olgu $x_m=(\xi_1^m,\dots,\xi_n^m),\h m\in\N$ Cauchy jada.
+Nendes ruumides
+\[
+	|\xi_1^m-\xi_n^m|\leq d(x_m,x_k) \rightarrow 0,
+\]
+kui $m,k\rightarrow 0$.
+Seega koordinaatide jadad $(\xi_i^m)_{m=1}^\infty$, $i=1,\dots,n$ on Cauchy arvjadad, mis koonduvad, s.t. $\xi_i^m\rightarrow\xi_i$ protsessis $m\rightarrow\infty$.
+Ruumides $m_n$ ja $l_p^n$ on koondumine samaväärne koordinaatide koondumisega, mistõttu 
+\[
+	x_m = (\xi_1^m,\dots,x_n^m) \rightarrow (\xi_1,\dots \xi_n)
+\]
+protsessis $m\rightarrow \infty$.
+
+\begin{yl}
+	Näidata, et ruum $c_0$ on kinnine ruumis $m$.
+\end{yl}
 
 \end{document}
