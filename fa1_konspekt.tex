@@ -1,5 +1,8 @@
 \documentclass{article}[12pt]
 \usepackage[T1]{fontenc}
+% font
+% \usepackage{clara}
+\usepackage{fbb}
 \usepackage[utf8]{inputenc}
 \usepackage[estonian]{babel}
 \usepackage{amsmath}
@@ -8,27 +11,21 @@
 \usepackage{latexsym}
 \usepackage{mathtools}
 \usepackage{setspace}
-\usepackage{ifthenx}
 \usepackage{graphicx}
 \usepackage{enumitem}
 \usepackage{import}
 \usepackage{pdfpages}
-\usepackage{transparent}
-\usepackage{xifthen}
 \usepackage{float}
 \usepackage[a4paper, lmargin=0.1666\paperwidth, rmargin=0.1666\paperwidth, tmargin=0.1111\paperheight, bmargin=0.1111\paperheight]{geometry} %margins
 
 % formatting section headings
 \usepackage{titlesec}
 
-% font
-\usepackage{clara}
-
 % for pdf hyperlink functionality
 % MUST BE LAST IMPORTED PACKAGE
 \usepackage{hyperref}
 \hypersetup{
-	colorlinks=true,
+  colorlinks=true,
   linkcolor=black,
   filecolor=magenta,      
   urlcolor=cyan,
@@ -133,7 +130,7 @@ Näited:
 \begin{enumerate}
 	\item $X=\R,\h d(x,y) = |x-y|$. Naturaalne kaugus;
 	\item $X=\R,\h d(x,y) = |e^x-e^y|$;
-	\item $X=\R,\h d(x,y) = |\arctan x - \arctan y|$. See kaugu on huvitav, sest maksimaalne kaugus kahe elemendi vahel on $\pi$. Ei esine lõpmatuid kaugusi.
+	\item $X=\R,\h d(x,y) = |\arctan x - \arctan y|$. See kaugus on huvitav, sest maksimaalne kaugus kahe elemendi vahel on $\pi$. Ei esine lõpmatuid kaugusi.
 	\item $X=\R,$
 	\[
 		d(x,y) = \begin{cases}
@@ -190,11 +187,11 @@ Järeldused:
 \subsection{Normeeritud ruum ja Banachi ruum}
 
 \begin{definition}
-	Vektorruumi $X$ nimetatakse normeeritud ruumiks, kui igale tema elemendile $x\in X$ on vastavusse seatud kindel reaalarv $||x||$, mida nimetatakse elemendi $x$ normiks, nii, et on täidetud tingimused:
+	Vektorruumi $X$ nimetatakse normeeritud ruumiks, kui igale tema elemendile $x\in X$ on vastavusse seatud kindel reaalarv $||x||$, mida nimetatakse elemendi $x$ normiks, nii, et on täidetud tingimused ($\lambda \in \R$):
 	\begin{enumerate}
-		\item $||x|| = 0 \Leftrightarrow x=0$ (samasuse aksioom);
-		\item $||\lambda x|| = ||\lambda||\cdot ||x||$ (homogeensuse aksioom);
-		\item $||x+y|| \leq ||x|| + ||y||$ (kolmnurga võrratus).
+		\item $||x|| = 0 \Leftrightarrow x=0$;\hfill (samasuse aksioom)
+		\item $||\lambda x|| = ||\lambda||\cdot ||x||$;\hfill (homogeensuse aksioom)
+		\item $||x+y|| \leq ||x|| + ||y||$.\hfill (kolmnurga võrratus)
 	\end{enumerate}	
 \end{definition}
 
@@ -204,6 +201,7 @@ Järeldused:
 
 \begin{jareldus}
 	\begin{enumerate}
+		\item[]
 		\item $\forall x\in X: \norm{x} \geq 0$ ($\norm{x} = \norm{-x}$);
 		\item $\bigg\lvert \norm{x} - \norm{y} \bigg\rvert \leq \norm{x+y}$;
 		\item (skalaariga korrutamise pidevus) Kui $\alpha_n\rightarrow \alpha$ ($\K$) ja $x_n\rightarrow x$ ($X$), siis $\alpha_n x_n\rightarrow \alpha x$ ($X$);
@@ -211,7 +209,7 @@ Järeldused:
 	\end{enumerate}
 \end{jareldus}
 
-Täielikku normeeritud ruumi nimetatase Banachi ruumiks. (Mida tähendab täielik normeeritud ruum??)
+Täielikku normeeritud ruumi nimetatase Banachi ruumiks.
 
 \section{Klassikalised lõplikumõõtmelised normeeritud ruumid}
 
@@ -649,7 +647,10 @@ Funktsionaalruumidest, mida vaatasime, pole separaabel ainult ruum $M[a,b]$.
 	Tõestada, et separaabli ruumi alamruum on separaabel.
 \end{yl}
 
-\section{Täielikud meetrilised ruumid}
+\section{Täielikud meetrilised ruumid ja Banachi ruumid}
+
+\subsection{Cauchy jadad}
+
 \begin{definition}
 	Meetrilise ruumi elementide jada $x_n$ nimetatakse Cauchy jadaks ehk fundamentaaljadaks, kui $d(x_n,x_m)\rightarrow 0$ protsessis $n,m\rightarrow 0$.
 	\[
@@ -660,6 +661,8 @@ Funktsionaalruumidest, mida vaatasime, pole separaabel ainult ruum $M[a,b]$.
 \begin{lause}
 	Iga koonduv jada on Cauchy jada.
 \end{lause}
+
+\subsection{Meetrilised ruumid}
 
 \begin{definition}
 	Meetrilist ruumi nimetatakse täielikuks, kui temas iga Cauchy jada koondub.
@@ -717,5 +720,201 @@ protsessis $m\rightarrow \infty$.
 \begin{yl}
 	Näidata, et ruum $c_0$ on kinnine ruumis $m$.
 \end{yl}
+
+\begin{theorem}[Teoreem üksteisesse sisestatud keradest]
+	Meetriline ruum on täielik parajasti siis, kui temas üksteisesse sisestatud kinniste kerade jadas kerade raadiuste nullile lähenemisest järeldub, et neil keradel on ühine punkt.
+\end{theorem}
+\begin{toestus}
+	\begin{enumerate}
+		\item[]
+		\item Eeldame, et täielikus meetrilises ruumis on antud kinniste kerade jada $(B_n)$, kus $B_n = \overline{B}(a_n,r_n)$ nii, et $B_1\supset B_2\supset \dots$ ja $r_n\rightarrow 0$.
+		Näitame kõigepealt, et keskpunktide jada $a_n$ on fundamentaaljada.
+	\end{enumerate}
+\end{toestus}
+
+\begin{yl}
+	Näidata, et kerade ühine punkt $a$ on ainus.
+\end{yl}
+
+\begin{theorem}[Baire'i teoreem]
+	Kui täielik meetriline ruum avaldub loenduva hulga kinniste hulkade ühendina, siis vähemalt üks neist hulkadest sisaldab mingit kera.
+\end{theorem}
+\begin{toestus}
+	Avaldugu täielik meetriline ruum $X$ ühendina $X=\bigcup_{n=1}^\infty F_n$, kus hulgad $F_n$ on kinnised. Oletame vastuväiteliselt, et ükski hulkadest $F_n$ ei sisalda ühtegi kera.
+
+	Olgu positiivne arvjada $\epsilon_n \rightarrow 0$. Kuna $X$ sisaldab kerasid, siis $F_1\neq X$ ehk $X\setminus F_1\neq \emptyset$. Hulk $X\setminus F_1$ on lahtine, järelikult sisaldab ta mingit kinnist kera $B_1 = \overline{B}(x_1,r_1)$, kusjuures võime eeldada, et $r_1 < \epsilon_1$.
+
+	Hulk $F_2$ ei sisalda kerasid, mistõttu ei sisalda ta ka kera $B(x_1,r_1)$. Kui $(X\setminus F_2)\cap B(x_1,r_1) = \emptyset$, siis $B(x_1,r_1)\subset X\setminus(X\setminus F_2) = F_2$. Seega $(X\setminus F_2)\cap B(x_1,r_1)\neq \emptyset$. Kuna hulk $(X\setminus F_2)\cap B(x_1,r_1)$ on lahtine, siis sisaldab ta mingit kinnist kera $B_2 = \overline{B}(x_2,r_2), r_2 < \epsilon_2$.
+
+	Analoogiliselt jätkates saame, et $(X\setminus F_n)\cap B(x_{n-1},r_{n-1})$ sisaldab mingit kinnist kera $B_n = \overline{B}(x_n,r_n),r_n < \epsilon_n$, ning niiviisi moodustub üksteisesse sisestatud kerade jada $B_1\supset \dots\supset B_n\supset \dots$, kusjuures $B_n\in X\setminus F_n$ ja kerade raadiused lähenevad nullile. Eelmise teoreemi põhjal on keradel $B_n$ ühine punkt $a$. Seega $\forall n\in\N: a\in B_n\subset X\setminus F_n$, millest järeldub, et $a\notin F_n$ ühegi $n$ korral. See aga tähendab, et $a\notin \bigcup_{n=1}^\infty F_n$, mis läheb vastuollu võrdusega $X=\bigcup_{n=1}^\infty F_n$.
+	\qed
+\end{toestus}
+
+\section{Meetrilise ruumi täield}
+
+\begin{definition}
+	Meetrilisi ruume $X_0$ ja $X_1$ vastavalt kaugustega $d_0$ ja $d_1$ nimetatakse isomeetrilisteks, kui leidub bijektsioon $\varphi : X_0\rightarrow X_1$, mis säilitab elementide vahelise kauguse, s.t
+	\[
+		\forall x,y\in X_0: \h d_1(\varphi(x),\varphi(y)) = d_0(x,y).
+	\]
+	Bijektsiooni $\varphi$ nimetatakse isomeetriaks.
+\end{definition}
+
+\begin{definition}
+	Meetrilise ruumi $X_0$ täieldiks nimetatakse niisugust meetrilist ruumi $X$, mille puhul $X_0$ on isomeetriline ruumi $X$ mingi kõikjal tiheda alamruumiga.
+\end{definition}
+
+Näiteks on $\Q$ täieldiks $\R$.
+
+\begin{lause}
+	Täieliku meetrilise ruumi alamruumi täieldiks on tema sulund.
+\end{lause}
+
+\begin{toestus}
+	Olgu $X_0$ täieliku meetrilise ruumi alamruum. 
+	Tema sulund $\overline{X_0}$, olles täieliku meetrilise ruumi kinnine osahulk, on samuti täielik meetriline ruum, milles $X_0$ on kõikjal tihe.
+	Vajalikuks isomeetriaks on ühikteisendus $I:X_0\rightarrow X_0$, $I(x) = x$, $x\in X_0$.
+\end{toestus}
+
+\begin{theorem}
+	Igal meetrilisel ruumil leidub täield, mis on isomeetria täpsuseni üheselt määratud.
+\end{theorem}
+\begin{toestus}
+	Olgu $X_0$ meeriline ruum kaugusega $d_0$. Konstrueerime ruumile $X_0$ täieldi.
+
+	Vaatleme ruumi $X_0$ elementidest moodustatud Cauchy jadade hulka.
+	Cauchy jadad $(x_n)$ ja $(y_n)$ loeme ekvivalentseteks, kui $d_0(x_n,y_n)\rightarrow 0$. Tegemist on ekvivalentsusseosega, sest
+	\begin{enumerate}
+		\item Cauchy jada $(x_n)$ on iseendaga ekvivalentne;\hfill (refleksiivsus)
+		\item kui $(x_n)$ ja $(y_n)$ on ekvivalentsed, siis kauguse $d_0$ sümmeetria tõttu on ka $(y_n)$ ja $(x_n)$ ekvivalentsed;\hfill (sümmeerilisus)
+		\item Kui $(x_n)$ ja $(y_n)$ ning $(y_n)$ ja $(z_n)$ on ekvivalentsed, siis kolmnurga võrratusest
+		\[
+			d_0(x_n,z_n) \leq d_0(x_n,y_n) + d_0(y_n,z_n)
+		\]
+		järeldub, et $d_0(x_n,z_n)\rightarrow 0$, s.t. ka $(x_n)$ ja $(z_n)$ on ekvivalentsed.\hfill (transitiivsus)
+	\end{enumerate}
+
+	Seega tekib kõigi ruumi $X_0$ elementidest moodustaud Cauchy jadade hulgas klassijaotus. Loeme hulga $X$ elementideks omavahel ekvivalentsete Cauchy jadade klassid, s.t. $X$ on faktorhulk vaadeldava seose järgi.
+
+	Järgnevalt muudame hulga $X$ meetriliseks ruumiks. Kui $x,y\in X$, siis valime suvalised Cauchy jadad $(x_n)\in x$ ja $(y_n)\in y$ ning defineerime
+	\[
+		d(x,y) = \lim_n d_0(x_n,y_n).
+	\]
+	Veendume selle definitsiooni korrektsuses ehk et igale elemendipaarile $x,y\in X$ seatakse vastavusse kindel arv $d(x,y)$.
+
+	Nelinurga võrratusest
+	\[
+		|d_0(x_n,y_n) - d_0(x_m,y_m)| \leq d_0(x_n,x_m) + d_0(y_n,y_m)
+	\]
+	järeldub (???), et jada $d_0(x_n,y_n)$ on Cauchy arvjada. Järelikult see koondub ja piirväärtus eksisteerib. Kui valiksime klassidest $x$ ja $y$ teised esindajad $(x_n')\in x$ ja $(y_n')\in y$, siis nelinurga võrratusest
+	\[
+		|d_0(x_n',y_n') - d_0(x_n,y_n)| \leq d_0(x_n',x_n) + d_0(y_n',y_n)
+	\]
+	saaksime, et
+	\[
+		\lim_n d_0(x_n',y_n') = \lim_n d_0(x_n,y_n).
+	\]
+	Seega on $d$ definitsioon korrektne.
+
+	Näitame, et $d$ rahuldab meetrika aksioome.
+	\begin{enumerate}
+		\item Kui $x=y$, siis $d(x,y)$ arvutamiseks vajaminevad Cauchy jadad on ekvivalentsed, s.t $d(x,y) = 0$.
+		Vastupidi, kui $d(x,y)=0$, siis Cauchy jadad $(x_n)\in x$ ja $(y_n)\in y$ on ekvivalentsed, mistõttu peavad nad kuuluma samasse klassi, seega $x=y$.\hfill (identsus)
+		\item 
+		\[
+			d(x,y) = \lim_n d_0(x_n,y_n) = \lim_n d_0(y_n,x_n) = d(y,x).
+		\]
+		\hfill (sümmeetria)
+		\item Olgu $(x_n)\in x$, $(y_n)\in y$ ja $(z_n)\in z$, siis võrratus
+		\[
+			d_0(x_n,y_n) \leq d_0(x_n,z_n) + d_0(z_n,y_n)
+		\]
+		annab piiril $n\rightarrow 0$ kolmnurga võrratuse kauguse $d$ jaoks.\hfill (kolmnurga võrratus)
+	\end{enumerate}
+	
+	Vaatleme ruumi $X$ osahulka $X_1$, mis koosneb sellistest ekvivalentsiklassidest, mis sisaldavad mingit ruumi $X_0$ elementide konstantset jada.
+	Defineerime kujutuse $\varphi:X_0\rightarrow X_1$, seades elemendile $x_0\in X_0$ vastavusse konstantset jada $(x_0,x_0,\dots)$ sisaldava ekvivalentsiklassi.
+	Ruumi $X_1$ ja kujutuse $\varphi$ definitsioonidest on selge, et $\varphi$ on sürjektsioon. Olgu $x_0,y_0\in X_0$, siis $(x_0,x_0,\dots)\in\varphi(x_0)$ ja $(y_0,y_0,\dots)\in\varphi(y_0)$, mistõttu
+	\[
+		d(\varphi(x_0),\varphi(y_0)) = \lim_n d_0(x_0,y_0) = d_0(x_0,y_0).
+	\]
+	Sellega oleme näidanud, et $\varphi: X_0\rightarrow X_1$ on isomeetria.
+
+	Tõestame alamruumi $X_1$ kõikjal tiheduse ruumis $X$. Valime vabalt $x\in X$ ja $\epsilon > 0$. Olgu $(x_n)\in x$. Siis leidub $N\in\N$ nii, et $d_0(x_n,x_m) < \frac{\epsilon}{2}$, kui $n,m \geq N$. Olgu $y$ ekvivalentsiklass, mis sisaldab konstantset jada $(x_N,x_N,\dots)$. Siis $y\in X_1$ ja
+	\[
+		d(x,y) = \lim_n d_0(x_n,x_N) \leq \frac{\epsilon}{2} < \epsilon.
+	\]
+	Oleme tõestanud, et $\overline{X_1} = X$.
+
+	Veendume ruumi $X$ täielikkuses.
+	Olgu $x^{(n)}\in X$ Cauchy jada. Ruumi $X_1$ kõikjal tiheduse tõttu saame leida elemendid $y^{(n)}\in X_1$ nii, et
+	\[
+		d(y^{(n)}, x^{(n)}) < \frac{1}{n},n\in\N.
+	\]
+	Iga klass $y^{(n)}$ sisaldab mingi konstantse jada $(y_n,y_n,\dots)$, kus $y_n\in X_0$. Seejuures jada $(y_0)$ ise on Cauchy jada ruumis $X_0$, sest $n,m\rightarrow\infty$ korral
+	\begin{align*}
+		d_0(y_n,y_m) &= d(y^{(n)}, y^{(m)}) \\
+		&\leq d(y^{(n)}, x^{(n)}) + d(x^{(n)}, x^{(m)}) + d(x^{(m)}, y^{(m)}) \\
+		&\leq d(x^{(n)}, x^{(m)}) + \frac{1}{n} + \frac{1}{m} \rightarrow 0.
+	\end{align*}
+	.........
+
+\end{toestus}
+
+\section{Pidevad operaatorid meetrilistes ruumides}
+
+\section{Banachi püsipunkti printsiip}
+
+\section{Hulga kompaktsus ja tõkestatus}
+
+\subsection*{Suhteline kompaktsus ja kompaktsus}
+
+\subsection*{Suhteliselt kompaktse hulga tõkestatus}
+
+\subsection*{Tõkestatus normeeritud ruumis}
+
+\section{Pidevad funktsionaalid kompaktsetel hulkadel (Weierstrassi teoreemid)}
+
+\section{Hausdorfi teoreem}
+
+\subsection*{Piisavuse tõestus}
+
+\section{Arzelà-Ascoli teoreem}
+
+\subsection*{Tarvilikkuse tõestus}
+
+\section{Põhimõisted}
+
+\begin{definition}
+	Hulk $X$ koos kujutusega $d:X\times X\rightarrow \R$ on meetriline ruum, kui $\forall x,y,z\in X$ korral:
+	\begin{enumerate}
+		\item $d(x,y)=0 \Leftrightarrow x=y$; \hfill (identsus)
+		\item $d(x,y) = d(y,x)$; \hfill (sümmeetria)
+		\item $d(x,y) + d(y,z) \geq d(x,z)$. \hfill (kolmnurga võrratus)
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}
+	Hulk $A\subset X$ on kõikjal tihe ruumis $X$, kui $\overline{A} = X$.
+\end{definition}
+
+\begin{definition}
+	Meetriline hulk on separaabel, kui temas leidub kõikjal tihe ülimalt loenduv hulk.
+\end{definition}
+
+\begin{definition}
+	Meetrilise ruumi elementide jada $x_n$ nimetatakse Cauchy jadaks ehk fundamentaaljadaks, kui
+	\[
+		\forall \epsilon > 0\h\exists N\in\N:\h n,m>N\Rightarrow d(x_n,x_m)<\epsilon.
+	\]
+\end{definition}
+
+\begin{definition}
+	Meetrilist ruumi nimetatakse täielikuks, kui temas iga Cauchy jada koondub.
+\end{definition}
+
+\begin{definition}
+	Meetrilise ruumi $X_0$ täieldiks nimetatakse niisugust meetrilist ruumi $X$, mille puhul $X_0$ on isomeetriline ruumi $X$ mingi kõikjal tiheda alamruumiga.
+\end{definition}
 
 \end{document}
