@@ -103,6 +103,8 @@ Hindamine:
 \end{enumerate}
 Semestri lõpus saab ühe kontrolltöödest uuesti teha, kirja läheb sel juhul uuesti kirjutatud töö tulemus.
 
+Käesolev konspekt on koostatud Eve Oja ja Peeter Oja 1991. aastal Tartus ilmunud õpiku "Funktsionaalanalüüs" põhjal.
+
 \tableofcontents
 
 \section{Meetriline ruum, normeeritud ruum ja Banachi ruum}
@@ -863,25 +865,246 @@ Näiteks on $\Q$ täieldiks $\R$.
 
 \section{Pidevad operaatorid meetrilistes ruumides}
 
+\begin{definition}
+	Operaatorit $f:X\rightarrow Y$ nimetatase pidevaks punktis $a\in X$, kui
+	\[
+		\forall \epsilon > 0 \h\exists \delta > 0 : d(x,a)<\delta \Rightarrow d(f(x),f(a))<\epsilon.
+	\]
+	Operaatorit $f$ nimetatakse pidevaks, kui ta on pidev ruumi $X$ igas punktis.
+\end{definition}
+
+\begin{theorem}
+	Operaator $f:X\rightarrow Y$ on pidev punktis $a\in X$ parajasti siis, kui mistahes koondva jada $x_n\rightarrow a$ korral $f(x_n)\rightarrow f(a)$.
+\end{theorem}
+
+\begin{toestus}
+	\begin{enumerate}
+		\item[]
+		\item Olgu operaator $f$ pidev punktis $a$. 
+		Vaatleme koonduvat jada $x_n\rightarrow a$.
+		Koonduvuse tõttu leidub $N$ nii, et kui $n > N$, siis $d(x_n,a)<\delta$.
+		Kuid siis $d(f(x_n),f(a))<\epsilon$, mistõttu $f(x_n)\rightarrow f(a)$.
+		\item Eeldame, et iga jada $x_n\rightarrow a$ korral $f(x_n)\rightarrow f(a)$.
+		Oletame vastuväiteliselt, et operaator $f$ ei ole pidev punktis $a$. Siis leidub $\epsilon > 0$ nii, et iga $\delta > 0$ korral leidub $x_\delta$, mille puhul $d(x_\delta, a)<\delta$, kuid $d(f(x_\delta), f(a))\geq \epsilon$. 
+		Valime jada $\delta_n\rightarrow 0$, näiteks $\delta_n = \frac{1}{n}$ ning vastavad elemendid $x_n$, mille korral $d(x_n,a)<\delta_n$, aga $d(f(x_n),f(a))\geq\epsilon$.
+		Siis $x_n\rightarrow a$, aga $f(x_n)\not\rightarrow f(a)$.
+	\end{enumerate}
+	\qed
+\end{toestus}
+
+\begin{theorem}
+	Operaator on pidev parajasti siis, kui lahtiste hulkade originaalid (selle operaatori järgi) on lahtised.
+\end{theorem}
+
+\begin{toestus}
+	\begin{enumerate}
+		\item[]
+		\item Olgu $f:X\rightarrow Y$ pidev ja olgu hulk $G\subset Y$ lahtine. 
+		Vaatleme suvalist elementi $a\in f^{-1}(G)$.
+		Siis $f(a)\in G$ ja hulga $G$ lahtisuse tõttu leidub kera $B(f(a),\epsilon)\subset G$.
+		Operaatori $f$ pidevuse tõttu leidub kera $B(a,\delta)$ nii, et $B(a,\delta)\subset f^{-1}(B(f(a), \epsilon))$.
+		Sellepärast $B(a,\delta)\subset f^{-1}(G)$, s.t. element $a$ sisaldub hulgas $f^{-1}(G)$ koos teda ümbritseva keraga.
+		Seega $f^{-1}(G)$ on lahtine.
+		\item Eeldame, et $f^{-1}(G)$ on lahtine alati, kui $G\subset Y$ on lahtine.
+		Valime vabalt $a\in X$ ja $\epsilon > 0$.
+		Kuna $B(f(a), \epsilon)\subset Y$ on lahtine, siis $f^{-1}(B(f(a), \epsilon))$ on lahtine.
+		Järelikult leidub punktil $a\in f^{-1}(B(f(a), \epsilon))$ ümbrus $B(a,\delta)$ nii, et $B(a,\delta)\subset f^{-1}(B(f(a), \epsilon))$, mis tähendab operaatori $f$ pidevust punktis $a$. Kuna $a\in X$ oli suvaline, siis $f$ on pidev.
+	\end{enumerate}
+\end{toestus}
+
+\begin{theorem}
+	Operaator on pidev parajasti siis, kui kinniste hulkade originaalid (selle operaatori järgi) on kinnised.
+\end{theorem}
+
+\begin{toestus}
+	Vaadeldes kõiki kinniseid hulki $F\subset Y$, paneme tähele, et hulgad $Y\setminus F$ esindavad parajasti kõiki lahtiseid hulki ruumis $Y$. 
+	Hulk $f^{-1}(F)\subset X$ on kinnine parajasti siis, kui hulk $X\setminus f^{-1}(F) = f^{-1}(Y\setminus F)$ on lahtine.
+	Eelmise teoreemi põhjal on aga $f$ pidev parajasti siis, kui hulga $Y\setminus F$ lahtisusest järeldub $f^{-1}(Y\setminus F)$ lahtisus.
+	\qed
+\end{toestus}
+
+\begin{theorem}
+	Järgmised tingimused on samaväärsed:
+	\begin{enumerate}
+		\item operaator $f:X\rightarrow Y$ on pidev;
+		\item iga $A\subset X$ korral $f(\overline{A})\subset \overline{f(A)}$;
+		\item iga $B\subset Y$ korral $\overline{f^{-1}(B)}\subset f^{-1}(\overline{B})$;
+		\item iga $B\subset Y$ korral $f^{-1}(B^\circ)\subset (f^{-1}(B))^\circ$.
+	\end{enumerate}
+\end{theorem}
+
+\begin{toestus}
+	$(1^\circ\Rightarrow 2^\circ)$
+	Eeldame, et $f$ on pidev.
+	Sisalduvusest $f(A)\subset\overline{f(A)}$ järeldub, et 
+	$$
+		f^{-1}(f(A))\subset f^{-1}(\overline{f(A)})
+	$$
+	ning $A\subset f^{-1}(f(A))$ tõttu ka 
+	$$
+		A\subset f^{-1}(\overline{f(A)}).
+	$$
+	Et aga $\overline{f(A)}$ kinnisuse ja $f$ pidevuse tõttu $f^{-1}(\overline{f(A)})$ on kinnine, siis $\overline{A}\subset f^{-1}(\overline{f(A)})$. Viimasest järeldub, et
+	\[
+		f(\overline{A})\subset f(f^{-1}(\overline{f(A)})) \subset \overline{f(A)}.
+	\]
+
+	$(2^\circ\Rightarrow 3^\circ)$
+	Valime vabalt $B\subset Y$ ning rakendame hulgale $A=f^{-1}(B)$ tingimust $2^\circ$.
+	Siis
+	\[
+		f(\overline{f^{-1}(B)}) \subset \overline{f(f^{-1}(B))} \subset \overline{B},
+	\]
+	mille abil saame
+	\[
+		\overline{f^{-1}(B)} \subset f^{-1}(f(\overline{f^{-1}(B)}))\subset f^{-1}(\overline{B}).
+	\]
+
+	$(3^\circ\Rightarrow 4^\circ)$
+	Olgu $B\subset Y$, siis tingimuse $3^\circ$ põhjal
+	\[
+		\overline{f^{-1}(Y\setminus B)} \subset f^{-1}(\overline{Y\setminus B}).
+	\]
+	Arvestades võrdust $B^\circ = Y\setminus \overline{Y\setminus B}$, saame nüüd
+	\begin{align*}
+		f^{-1}(B^\circ) &= f^{-1}(Y\setminus \overline{Y\setminus B}) = X\setminus f^{-1}(\overline{Y\setminus B}) \\
+		&\subset X\setminus \overline{f^{-1}(Y\setminus B)} = X\setminus \overline{X \setminus f^{-1}(B)} = (f^{-1}(B))^\circ.
+	\end{align*}
+
+	$(4^\circ\Rightarrow 1^\circ)$
+	Olgu $G\subset Y$ lahtine, siis $G = G^\circ$.
+	Tingimuse $4^\circ$ põhjal
+	\[
+		f^{-1}(G) = f^{-1}(G^\circ) \subset (f^{-1}(G))^\circ,
+	\]
+	mistõttu $f^{-1}(G)$ on lahtine.
+	Seega on $f$ pidev operaator.
+	\qed
+\end{toestus}
+
 \section{Banachi püsipunkti printsiip}
+
+\begin{definition}
+	Operaatori $f:X\rightarrow X$ püsipunktiks nimetatakse sellist elementi $x^*\in X$, et $f(x^*) = x^*$.
+\end{definition}
+
+Operaatori $f$ püsipunktid on parajasti võrrandi $x=f(x)$ võrrandid.
+
+\begin{definition}
+	Öeldakse, et operaator $f:X\rightarrow X$ on ahendav (ehk lähenemisoperaator ehk suruv operaator), kui leidub $q < 1$ nii, et
+	\[
+		\forall x,y\in X:\h d(f(x),f(y)) \leq qd(x,y).
+	\]
+\end{definition}
+
+\begin{definition}
+	Lipschitzi tingimust rahuldavad operaatorid $f$ on sellised, mille korral leidub arv $L$ nii, et
+	\[
+		\forall x,y\in X:\h d(f(x),f(y)) \leq Ld(x,y).
+	\]	
+\end{definition}
+
+Kui $x_n\rightarrow a$ ehk $d(x_n,a)\rightarrow 0$, siis sändvitš teoreemi tõttu ka $f(x_n)\rightarrow f(a)$.
+
+\begin{theorem}[Banachi püsipunkti printsiip]
+	Kui $X$ on täielik meetriline ruum, siis ahendaval operaatoril $f:X\rightarrow X$ on parajasti üks püsipunkt.
+\end{theorem}
+
+\begin{toestus}
+	Valime vabalt $x_0\in X$.
+	Olgu $x_1 = f(x_0), x_2 = f(x_1), \dots, x_n = f(x_{n-1}),\dots$.
+	Näitame, et jada $x_n$ on Cauchy jada.
+	Kuna
+	\begin{align*}
+		d(x_n,x_{n+1}) &= d(f(x_{n-1}), f(x_n)) \leq qd(x_{n-1},x_n) \\
+		&\leq q^2 d(x_{n-2}, x_{n-1}) \leq \dots \leq q^n d(x_0,x_1),
+	\end{align*}
+	siis protsessis $n\rightarrow 0$
+	\begin{align*}
+		d(x_n,x_{n+p}) &\leq d(x_n,x_{n+1}) + \dots + d(x_{n+p-1}, x_{n+p}) \\
+		&\leq q^n d(x_0,x_1) + \dots + q^{n+p-1}d(x_0,x_1) \\
+		&\leq \sum_{k=0}^\infty q^{n+k} d(x_0,x_1) = \frac{q^n}{1-q} d(x_0,x_1) \rightarrow 0.
+	\end{align*}
+
+	Seega $\forall \epsilon > 0\h\exists N\in \N:\h d(x_n,x_{n+p})<\epsilon$ iga $p = 1,2,\dots$ korral ehk $(x_n)$ on Cauchy jada.
+	Ruumi $X$ täielikkuse tõttu jada $(x_n)$ koondub, olgu $x_n\rightarrow x^*$.
+	Operaatori $f$ pidevusest järeldub nüüd, et
+	\[
+		f(x^*) = \lim_n f(x_n) = \lim_n x_{n+1} = x^*,
+	\]
+	s.t. $x^*$ on operaatori $f$ püsipunkt.
+
+	Kui lisaks püsipunktile $x^* = f(x^*)$ leiduks veel $x^{**} = f(x^{**})$, siis
+	\[
+		d(x^*, x^{**}) = d(f(x^*), f(x^{**})) \leq qd(x^*, x^{**}).
+	\]
+	Tingimuse $q < 1$ tõttu kehtib viimane parajasti siis, kui $d(x^*, x^{**}) = 0$, mistõttu $x^* = x^{**}$.
+	\qed
+\end{toestus}
+
+\begin{theorem}
+	Kui $X$ on täielik meetriline ruum ja leidub $n\in \N$ selliselt, et $f^n := \underbrace{f\circ\dots\circ f}_n$ on ahendav, siis operaatoril $f$ on parajasti üks püsipunkt.
+\end{theorem}
+
+\begin{toestus}
+	Banachi püsipunkti printsiibi põhjal leidub operaatoril $f^n$ parajasti üks püsipunkt $x^* = f^n(x^*)$.
+	Kuna $f(x^*) = f(f^n(x^*)) = f^n(f(x^*))$, siis ka $f(x^*)$ on operaatori $f^n$ püsipunkt. Seepärast $f(x^*) = x^*$.
+
+	Kui veel $x^{**} = f(x^{**})$, siis $x^{**} = f^n(x^{**})$, seega $x^{**} = x^*$.
+\end{toestus}
 
 \section{Hulga kompaktsus ja tõkestatus}
 
-\subsection*{Suhteline kompaktsus ja kompaktsus}
+\subsection{Suhteline kompaktsus ja kompaktsus}
 
-\subsection*{Suhteliselt kompaktse hulga tõkestatus}
+\begin{definition}
+	Hulka $K$ meetrilises ruumis nimetatakse suhteliselt kompaktseks ruumiks, kui igast $K$ elementidest moodustatud jadast saab eraldada koonduva osajada.
+\end{definition}
 
-\subsection*{Tõkestatus normeeritud ruumis}
+\begin{definition}
+	Hulka $K$ nimetatakse kompaktseks, kui see on suhteliselt kompaktne ja kinnine.
+\end{definition}
+
+Näiteks on Bolzano-Weierstrassi teoreemi põhjal iga tõkestatud hulk ruumis $\R$ suhteliselt kompaktne ja iga tõkestatud kinnine hulk kompaktne. Samuti on iga lõplik hulk kompaktne, sest tema elementidest moodustatud jadas vähemalt üks element esineb lõpmatu arv kordi. Selle elemendi abil saab jadast eraldada konstantse osajada. Vastunäiteks, $\N$ ei ole suhteliselt kompaktne ruumis $\R$.
+
+\subsection{Suhteliselt kompaktse hulga tõkestatus}
+
+\begin{definition}
+	Hulka meetrilises ruumis nimetatakse tõkestatuks, kui ta sisaldab mingit kera.
+\end{definition}
+
+\begin{lause}
+	Iga suhteliselt kompaktne hulk on tõkestatud.
+\end{lause}
+
+\begin{toestus}
+	Oletame vastuväiteliselt, et suhteliselt kompaktne hulk $K$ ruumis $X$ ei ole tõkestatud. 
+	Valime suvalise elemendi $a\in X$. Kuna $K\not\subset B(a,1)$, siis leidub $x_1\in K$ nii, et $d(x_1,a)\geq 1$. 
+	Kuna $K\not\subset B(a,2)$, siis leidub $x_2\in K$ nii, et $d(x_2,a)\geq 2$. 
+	Niiviisi jätkates leiame $x_n\in K$ nii, et $d(x_n,a)\geq n$, $n\in\N$, mistõttu $d(x_n,a)\rightarrow \infty$ protsessis $n\rightarrow \infty$. 
+	Hulga suhteline kompaktsus lubab eraldada jadast $(x_n)$ koonduva osajada $x_{n_k}\rightarrow x\in X$. 
+	Kauguse pidevuse tõttu $d(x_{n_k}, a)\rightarrow d(x,a)$ protsessis $k\rightarrow \infty$, mis on vastuolus tingimusega $d(x_{n_k},a)\rightarrow\infty$.
+	\qed
+\end{toestus}
+
+\subsection{Tõkestatus normeeritud ruumis}
 
 \section{Pidevad funktsionaalid kompaktsetel hulkadel (Weierstrassi teoreemid)}
 
 \section{Hausdorfi teoreem}
 
-\subsection*{Piisavuse tõestus}
+
+\begin{theorem}[Hausdorfi teoreem]
+	Meetrilise ruumi $X$ osahulga $K$ suhteliseks kompaktsuseks on tarvilik (ning ruumi $X$ täielikkuse korral ka piisav), et iga $\epsilon > 0$ korral leiduks hulgale $K$ lõplik $\epsilon$-võrk.
+\end{theorem}
+
+\subsection{Tarvilikkuse tõestus}
+
+\subsection{Piisavuse tõestus}
 
 \section{Arzelà-Ascoli teoreem}
 
-\subsection*{Tarvilikkuse tõestus}
+\subsection{Tarvilikkuse tõestus}
 
 \section{Põhimõisted}
 
