@@ -723,6 +723,8 @@ protsessis $m\rightarrow \infty$.
 	Näidata, et ruum $c_0$ on kinnine ruumis $m$.
 \end{yl}
 
+\subsection{Teoreem üksteisesse sisestatud keradest}
+
 \begin{theorem}[Teoreem üksteisesse sisestatud keradest]
 	Meetriline ruum on täielik parajasti siis, kui temas üksteisesse sisestatud kinniste kerade jadas kerade raadiuste nullile lähenemisest järeldub, et neil keradel on ühine punkt.
 \end{theorem}
@@ -731,12 +733,46 @@ protsessis $m\rightarrow \infty$.
 		\item[]
 		\item Eeldame, et täielikus meetrilises ruumis on antud kinniste kerade jada $(B_n)$, kus $B_n = \overline{B}(a_n,r_n)$ nii, et $B_1\supset B_2\supset \dots$ ja $r_n\rightarrow 0$.
 		Näitame kõigepealt, et keskpunktide jada $a_n$ on fundamentaaljada.
+		Olgu $\epsilon > 0$ suvaline ja $N$ selline, et iga $n>N$ korral $r_n < \epsilon$.
+		Kui nüüd $n,m>N$ ja näiteks $m\geq n$, siis $a_m\in B_m\subset B_n = \overline{B}(a_n,r_n)$, mistõttu $d(a_m,a_n)\leq r_n<\epsilon$, kui $m,n > N$.
+		Oleme näidanud, et $(a_n)$ on Cauchy jada.
+
+		Ruumi täielikkuse tõttu $a_n\underset{n}{\rightarrow} a$.
+		Näitame, et $a\in B_n$ iga $n=1,2,\dots$ korral.
+		Valime vabalt $B_n$. 
+		Kuna $a_n,a_{n+1},\dots\in B_n$, $a_{n+k}\underset{k}{\rightarrow}a$ ja $B_n$ on kinnine, siis $a\in B_n$.
+		\item Olgu meetriline ruum ning selles suvaline Cauchy jada $(x_n)$.
+		Peame näitama, et see ruum on täielik ehk et jada $(x_n)$ koondub.
+		Eraldame selleks jadast $(x_n)$ mingi koonduva osajada.
+
+		Jada $(x_n)$ fundamentaalsuse tõttu leidub selline liige $x_{n_1}$, et iga $n\geq n_1$ korral 
+		\[
+			d(x_n,x_{n_1})<\frac{1}{2}.
+		\]
+		Kui on valitud liikmed $x_{n_1},\dots,x_{n_{k-1}}$, kusjuures $n_1<n_2<\dots<n_{k-1}$, siis leiame $x_{n_k}$ nii, et kõikide $n\geq n_k$ korral $n_k > n_{k-1}$ ja $d(x_n,x_{n_k}) < \frac{1}{2^k}$.
+
+		Vaatleme kinniste kerade jada $(B_k)=\overline{B}(x_{n_k},\frac{1}{2^{k-1}})$, $k=1,2,\dots$ ning näitame, et need on üksteisesse sisestatud.
+		Kui $x\in B_{k+1}$ ehk $d(x,x_{n_{k+1}})\leq \frac{1}{2^k}$, siis
+		\begin{align*}
+			d(x,x_{n_k}) &\leq d(x,x_{n_{k+1}}) + d(x_{n_{k+1}},x_{n_k}) \\
+			&< \frac{1}{2^k} + \frac{1}{2^k} = \frac{1}{2^{k-1}},
+		\end{align*}
+		mistõttu $x\in B_k$.
+
+		Et kerade $B_k$ raadiused $\frac{1}{2^{k-1}}$ lähenevad nullile, siis on neil keradel ühine punkt $x$.
+		Seejuures $x_{n_k}\underset{k}{\rightarrow}x$, sest
+		\[
+			d(x_{n_k},x)\leq \frac{1}{2^{k-1}} \underset{k}{\rightarrow} 0.
+		\]
+		\qed
 	\end{enumerate}
 \end{toestus}
 
 \begin{yl}
 	Näidata, et kerade ühine punkt $a$ on ainus.
 \end{yl}
+
+\subsection{Baire'i teoreem}
 
 \begin{theorem}[Baire'i teoreem]
 	Kui täielik meetriline ruum avaldub loenduva hulga kinniste hulkade ühendina, siis vähemalt üks neist hulkadest sisaldab mingit kera.
@@ -859,7 +895,13 @@ Näiteks on $\Q$ täieldiks $\R$.
 		&\leq d(y^{(n)}, x^{(n)}) + d(x^{(n)}, x^{(m)}) + d(x^{(m)}, y^{(m)}) \\
 		&\leq d(x^{(n)}, x^{(m)}) + \frac{1}{n} + \frac{1}{m} \rightarrow 0.
 	\end{align*}
-	.........
+	Niisiis leidub $x\in X$, kuhu kuulub jada $(y_n)$.
+	Seejuures
+	\begin{align*}
+		d(x^{(n)},x) &\leq d(x^{(n)}, y^{(n)}) + d(y^{(n)},x) \\
+		&\leq \frac{1}{n} + \lim_{m\rightarrow \infty} d_0(y_n,y_m).
+	\end{align*}
+	\dots
 
 \end{toestus}
 
