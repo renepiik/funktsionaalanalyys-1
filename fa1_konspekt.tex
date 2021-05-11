@@ -1109,6 +1109,31 @@ Kui $x_n\rightarrow a$ ehk $d(x_n,a)\rightarrow 0$, siis sändvitš teoreemi tõ
 
 Näiteks on Bolzano-Weierstrassi teoreemi põhjal iga tõkestatud hulk ruumis $\R$ suhteliselt kompaktne ja iga tõkestatud kinnine hulk kompaktne. Samuti on iga lõplik hulk kompaktne, sest tema elementidest moodustatud jadas vähemalt üks element esineb lõpmatu arv kordi. Selle elemendi abil saab jadast eraldada konstantse osajada. Vastunäiteks, $\N$ ei ole suhteliselt kompaktne ruumis $\R$.
 
+\begin{lause}
+	Suhteliselt kompaktse hulga sulund on kompaktne.
+\end{lause}
+
+\begin{toestus}
+	Et hulga sulund on alati kinnine, siis piisab tõestada, et suhteliselt kompaktse hulga $K$ sulund $\overline{K}$ on suhteliselt kompaktne.
+	Vaatleme suvalist jada $x_n\in \overline{K}$.
+	Valime $y_n\in K,n\in\N$ nii, et $d(x_n,y_n)\rightarrow 0$.
+	Hulga $K$ suhtelise kompaktsuse tõttu võime leida $y_n$ osajada nii, et $y_n\xrightarrow[n\in N']{} x$, kus $N'\subset\N$.
+	Siis saame võrratusest
+	\[
+		d(x_n,x) \leq d(x_n,y_n) + d(y_n,x),
+	\]
+	et $x_n\xrightarrow[n\in N']{} x$.
+\end{toestus}
+
+\begin{lause}
+	Kompaktne meetriline ruum on täielik.
+\end{lause}
+
+\begin{toestus}
+	Eelduse kohaselt saab igast Cauchy jadast eraldada koonduva osajada.
+	Kui aga Cauchy jada mingi osajadak koondub, siis koondub ka jada ise.
+\end{toestus}
+
 \subsection{Suhteliselt kompaktse hulga tõkestatus}
 
 \begin{definition}
@@ -1129,20 +1154,33 @@ Näiteks on Bolzano-Weierstrassi teoreemi põhjal iga tõkestatud hulk ruumis $\
 	\qed
 \end{toestus}
 
-\subsection{Tõkestatus normeeritud ruumis}
+\subsection{Hausdorfi teoreem}
 
-\section{Pidevad funktsionaalid kompaktsetel hulkadel (Weierstrassi teoreemid)}
+\begin{definition}
+	Olgu $X$ meetriline ruum ja $\epsilon>0$.
+	Hulga $A\subset X$ $\epsilon$-võrguks nimetatakse hulka $B\subset X$, mille puhul
+	\[
+		\forall x\in A\h\exists y\in B:\h d(x,y)<\epsilon.
+	\]
+\end{definition}
 
-\section{Hausdorfi teoreem}
-
+Näiteks, kui $\epsilon > \frac{1}{2}$, siis täisarvude hulk $\Z$ on $\epsilon$-võrguks ruumile $\R$ ja igale osahulgale $A\subset \R$, sest vahemikud $B(\kappa,\epsilon),\kappa\in\Z$, katavad ruumi $\R$.
 
 \begin{theorem}[Hausdorfi teoreem]
 	Meetrilise ruumi $X$ osahulga $K$ suhteliseks kompaktsuseks on tarvilik (ning ruumi $X$ täielikkuse korral ka piisav), et iga $\epsilon > 0$ korral leiduks hulgale $K$ lõplik $\epsilon$-võrk.
 \end{theorem}
+\begin{toestus}
+	\begin{enumerate}
+		\item[]
+		\item Olgu hulk $K$ suhteliselt kompaktne.
+	\end{enumerate}
+\end{toestus}
 
-\subsection{Tarvilikkuse tõestus}
+\subsection{Tõkestatus normeeritud ruumis}
 
-\subsection{Piisavuse tõestus}
+\section{Pidevad funktsionaalid kompaktsetel hulkadel (Weierstrassi teoreemid)}
+
+
 
 \section{Arzelà-Ascoli teoreem}
 
